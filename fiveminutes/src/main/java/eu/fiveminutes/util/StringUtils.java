@@ -1,6 +1,6 @@
 package eu.fiveminutes.util;
 
-public class StringUtil {
+public class StringUtils {
 
     public static boolean isStringEmpty(String string) {
         if (string == null) {

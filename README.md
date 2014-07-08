@@ -6,8 +6,8 @@ These are common functionalities used by Five Minutes apps. See it in use by run
 
 * In your app project add this as repository as a submodule: `git submodule add git@bitbucket.org:fiveminutes/fiveminutes-android.git`
 * Import **fiveminutes** as library project
-* Create branch named _your-app-name_: `cd fiveminutes-android && git checkout -b your-app-name`
-* While developing, put anything that may be of use to other into library
+* Create branch: `cd fiveminutes-android && git checkout -b your-branch-name`
+* While developing, put anything that may be of use to other to library
 
 ## Advice
 
