@@ -4,9 +4,9 @@ These are common functionalities used by Five Minutes apps. See it in use by run
 
 ## Using the library
 
-* In your app project add this as repository as a submodule `git submodule add git@bitbucket.org:fiveminutes/fiveminutes-android.git`  
+* In your app project add this as repository as a submodule: `git submodule add git@bitbucket.org:fiveminutes/fiveminutes-android.git`
 * Import **fiveminutes** as library project
-* Create branch named _your-app-name_ `cd fiveminutes-android && git checkout -b your_app_name`
+* Create branch named _your-app-name_: `cd fiveminutes-android && git checkout -b your-app-name`
 * While developing, put anything that may be of use to other into library
 
 ## Advice
@@ -23,4 +23,4 @@ These are common functionalities used by Five Minutes apps. See it in use by run
 ## Adding demo
 
 * Create activity demoing your work in **demo/src/main**
-* Open **Activities.java** and add that activity class
+* Add that activity class to **Activities.java**
