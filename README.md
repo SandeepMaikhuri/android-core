@@ -18,7 +18,7 @@ These are common functionalities used by Five Minutes apps. See it in use by run
 
 ## Writing tests
 
-* Add test classes to **library/src/androidTest**
+* Add test classes to **fiveminutes/src/androidTest**
 
 ## Adding demo
 
