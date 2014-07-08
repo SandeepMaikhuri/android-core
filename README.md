@@ -12,9 +12,9 @@ These are common functionalities used by Five Minutes apps. See it in use by run
 ## Advice
 
 * Do not push into master
-* Do not put anything app-specific(_eu.fiveminutes.your-app-name_ stuff)
+* Do not put anything app-specific (_eu.fiveminutes.your-app-name_ stuff)
 * Put dependencies in **fiveminutes/build.gradle**
-* We like it when the code is test covered or has demo showcasing it. You can skip demo if your code is not interactive/visible to the user.
+* We like it when the code is test covered or has demo showcasing it. You can skip demo if your code is not interactive/visible to the user
 
 ## Writing tests
 
