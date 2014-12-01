@@ -4,16 +4,16 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.test.AndroidTestCase;
 
-import eu.fiveminutes.ui.utils.FragmentUtils;
+import eu.fiveminutes.ui.utils.FragmentArguments;
 
-public class FragmentUtilsTest extends AndroidTestCase {
+public class FragmentArgumentsTest extends AndroidTestCase {
 
   public void test(){
     Fragment fragment = new DummyFragment();
-    FragmentUtils.setBoolean(fragment, "test", true);
-    FragmentUtils.setLong(fragment, "long", 235);
-    FragmentUtils.setInt(fragment, "int", 999);
-    FragmentUtils.setString(fragment, "string", "pero");
+    FragmentArguments.putBoolean(fragment, "test", true);
+    FragmentArguments.putLong(fragment, "long", 235);
+    FragmentArguments.putInt(fragment, "int", 999);
+    FragmentArguments.putString(fragment, "string", "pero");
 
     Bundle arguments = fragment.getArguments();
     assertEquals(arguments.getBoolean("test"), true);
