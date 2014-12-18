@@ -4,6 +4,7 @@ import android.content.Context;
 
 import dagger.Module;
 import eu.fiveminutes.dagger.ApplicationScopeModule;
+import eu.fiveminutes.demo.common.application.DemoApplication;
 
 /**
  * Created by tomo on 12/18/14.
@@ -14,6 +15,7 @@ import eu.fiveminutes.dagger.ApplicationScopeModule;
         library = true,
         addsTo = ApplicationScopeModule.class,
         injects = {
+                DemoApplication.class
         }
 )
 public class DemoApplicationScopeModule {
