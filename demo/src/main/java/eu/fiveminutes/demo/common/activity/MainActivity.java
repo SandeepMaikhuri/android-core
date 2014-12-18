@@ -1,4 +1,4 @@
-package eu.fiveminutes.demo;
+package eu.fiveminutes.demo.common.activity;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -10,8 +10,6 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import eu.fiveminutes.demo.R;
 
 public class MainActivity extends ListActivity {
 

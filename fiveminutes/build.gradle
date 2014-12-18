@@ -1,5 +1,9 @@
 apply plugin: 'com.android.library'
 
+configurations {
+    preprocess
+}
+
 android {
     compileSdkVersion 19
     buildToolsVersion "20.0.0"
@@ -26,4 +30,6 @@ android {
 dependencies {
     compile 'com.android.support:support-v4:20.0.0'
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    preprocess 'com.squareup.dagger:dagger-compiler:1.2.1'
+    compile 'com.squareup.dagger:dagger:1.2.1'
 }
