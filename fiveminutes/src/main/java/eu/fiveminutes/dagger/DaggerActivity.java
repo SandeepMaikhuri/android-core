@@ -3,6 +3,7 @@ package eu.fiveminutes.dagger;
 import android.app.Activity;
 import android.os.Bundle;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dagger.ObjectGraph;
@@ -21,7 +22,11 @@ public abstract class DaggerActivity extends Activity
     protected void onCreate(Bundle savedInstanceState) {
         // Create the activity graph by .plus-ing our modules onto the application graph.
         DaggerApplication application = (DaggerApplication) getApplication();
-        activityGraph = application.getObjectGraph().plus(getActivityModules());
+
+        List<Object> modules = new ArrayList<Object>();
+        modules.add(new ActivityScopeModule(this));
+        modules.addAll(getActivityModules());
+        activityGraph = application.getObjectGraph().plus(modules.toArray());
 
         // Inject ourselves so subclasses will have dependencies fulfilled when this method returns.
         activityGraph.inject(this);

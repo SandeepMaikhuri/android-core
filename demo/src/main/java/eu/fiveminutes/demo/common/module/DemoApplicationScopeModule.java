@@ -6,10 +6,6 @@ import dagger.Module;
 import eu.fiveminutes.dagger.ApplicationScopeModule;
 import eu.fiveminutes.demo.common.application.DemoApplication;
 
-/**
- * Created by tomo on 12/18/14.
- */
-
 @Module(
         complete = false,
         library = true,

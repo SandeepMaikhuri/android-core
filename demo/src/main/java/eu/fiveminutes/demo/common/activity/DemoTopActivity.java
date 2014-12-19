@@ -6,9 +6,6 @@ import java.util.List;
 import eu.fiveminutes.dagger.DaggerActivity;
 import eu.fiveminutes.demo.common.module.DemoActivityScopeModule;
 
-/**
- * Created by tomo on 12/18/14.
- */
 public abstract class DemoTopActivity extends DaggerActivity {
 
     @Override

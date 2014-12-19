@@ -13,7 +13,7 @@ public abstract class DaggerFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Assume that it lives within a BaseActivity host
+        // Assume that it lives within a DaggerActivity host
         ((DaggerActivity) getActivity()).inject(this);
     }
 

@@ -1,19 +1,13 @@
 package eu.fiveminutes.demo.threading.activity;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
+import java.util.List;
+
 import eu.fiveminutes.demo.threading.fragment.ThreadingMainFragment;
+import eu.fiveminutes.demo.threading.module.ThreadingMainActivityModule;
 
-/**
- * Created by tomo on 12/18/14.
- */
-public class ThreadingMainActivity extends ThreadingContainerActivity {
-
-    public static Intent createIntent(Context context) {
-        return new Intent(context, ThreadingMainActivity.class);
-    }
+public final class ThreadingMainActivity extends ThreadingContainerActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,5 +16,12 @@ public class ThreadingMainActivity extends ThreadingContainerActivity {
         attachFragment(ThreadingMainFragment.createInstance(),
                 ThreadingMainFragment.TAG,
                 savedInstanceState);
+    }
+
+    @Override
+    protected List<Object> getActivityModules() {
+        List<Object> superModules = super.getActivityModules();
+        superModules.add(new ThreadingMainActivityModule());
+        return superModules;
     }
 }

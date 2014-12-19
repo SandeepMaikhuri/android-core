@@ -11,10 +11,6 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
- // * Created by tomo on 3/24/14.
- */
-
-/**
  * Here it provides the dependencies those have same lifetime of one activity in your app
  */
 @Module(
