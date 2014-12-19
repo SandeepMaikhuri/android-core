@@ -1,9 +1,5 @@
 apply plugin: 'com.android.application'
 
-configurations {
-    preprocess
-}
-
 android {
     compileSdkVersion 19
     buildToolsVersion '20.0.0'
@@ -26,23 +22,8 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':fiveminutes')
-    preprocess 'com.jakewharton:butterknife:4.0.1'
+    provided 'com.jakewharton:butterknife:4.0.1'
     compile 'com.jakewharton:butterknife:4.0.1'
-    preprocess 'com.squareup.dagger:dagger-compiler:1.2.1'
-    compile 'com.squareup.dagger:dagger:1.2.1'
-}
-
-android.applicationVariants.all { variant ->
-    //Where to place the generated code
-    variant.ext.set("dagger_gen_${variant.dirName}", file("${project.buildDir}/source/dagger_gen/${variant.dirName}"))
-
-    //Do the actual preprocessor things
-    variant.javaCompile.doFirst {
-        File out = variant.ext.get("dagger_gen_${variant.dirName}")
-        out.mkdirs()
-        variant.javaCompile.options.compilerArgs += [
-                '-processorpath', configurations.preprocess.getAsPath(),
-                '-s', out
-        ]
-    }
+    provided 'com.squareup.dagger:dagger-compiler:1.2.2'
+    compile 'com.squareup.dagger:dagger:1.2.2'
 }
