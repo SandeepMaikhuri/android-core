@@ -1,17 +1,17 @@
-package eu.fiveminutes.dagger;
+package eu.fiveminutes.dagger.compat;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-public abstract class DaggerCompatFragment extends Fragment {
+public abstract class DaggerFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // Assume that it lives within a DaggerActivity host
-        ((DaggerActionBarActivity) getActivity()).inject(this);
+        ((DaggerActivity) getActivity()).inject(this);
     }
 
     protected <T> T getView(int id) {
@@ -20,11 +20,11 @@ public abstract class DaggerCompatFragment extends Fragment {
 
     protected boolean isActivityLive() {
         Activity activity = getActivity();
-        if (activity == null || !(activity instanceof DaggerActionBarActivity)) {
+        if (activity == null || !(activity instanceof DaggerActivity)) {
             return false;
         }
 
-        DaggerActionBarActivity daggerActivity = (DaggerActionBarActivity) activity;
+        DaggerActivity daggerActivity = (DaggerActivity) activity;
         return daggerActivity.isActivityLive();
     }
 }

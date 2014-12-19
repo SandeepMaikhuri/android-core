@@ -8,6 +8,8 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import eu.fiveminutes.events.EventBus;
+import eu.fiveminutes.events.EventBusImpl;
 
 @Module(
         complete = false,
@@ -41,5 +43,11 @@ public class ApplicationScopeModule {
     @Singleton
     WindowManager provideWindowManager() {
         return (WindowManager) applicationContext.getSystemService(Context.WINDOW_SERVICE);
+    }
+
+    @Provides
+    @Singleton
+    EventBus provideEventBus() {
+        return new EventBusImpl();
     }
 }

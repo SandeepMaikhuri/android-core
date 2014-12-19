@@ -43,6 +43,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     preprocess 'com.squareup.dagger:dagger-compiler:1.2.1'
     compile 'com.squareup.dagger:dagger:1.2.1'
+    compile 'com.squareup:otto:1.3.5'
 }
 
 android.libraryVariants.all { variant ->

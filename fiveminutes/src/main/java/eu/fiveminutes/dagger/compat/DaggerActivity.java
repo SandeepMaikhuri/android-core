@@ -1,11 +1,13 @@
-package eu.fiveminutes.dagger;
+package eu.fiveminutes.dagger.compat;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
 import dagger.ObjectGraph;
+import eu.fiveminutes.dagger.DaggerApplication;
+import eu.fiveminutes.dagger.Injector;
 
-public abstract class DaggerActionBarActivity extends ActionBarActivity implements Injector {
+public abstract class DaggerActivity extends ActionBarActivity implements Injector {
 
     private ObjectGraph activityGraph;
 
