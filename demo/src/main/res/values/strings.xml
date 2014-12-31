@@ -4,6 +4,7 @@
     <string name="app_name">Five Minutes Demo</string>
     <string name="title_activity_string_util">StringUtilActivity</string>
     <string name="title_activity_custom_font">CustomFontActivity</string>
+    <string name="title_activity_threading_main">Threading examples</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 

@@ -1,4 +1,4 @@
-package eu.fiveminutes.demo;
+package eu.fiveminutes.demo.common.activity;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -11,8 +11,6 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-import eu.fiveminutes.demo.R;
-
 public class MainActivity extends ListActivity {
 
     @Override
@@ -23,13 +21,13 @@ public class MainActivity extends ListActivity {
 
     private ListAdapter buildListAdapter() {
         List<String> items = new ArrayList<String>();
-        for(Class<?> demo : Activities.classes) {
+        for (Class<?> demo : Activities.classes) {
             items.add(demo.getSimpleName().replaceFirst("Activity", ""));
         }
         return new ArrayAdapter<String>(
-            this,
-            android.R.layout.simple_list_item_1,
-            items);
+                this,
+                android.R.layout.simple_list_item_1,
+                items);
     }
 
     @Override
@@ -38,6 +36,4 @@ public class MainActivity extends ListActivity {
         Intent intent = new Intent(this, Activities.classes[position]);
         startActivity(intent);
     }
-
 }
-

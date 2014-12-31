@@ -1,4 +1,4 @@
-package eu.fiveminutes.demo;
+package eu.fiveminutes.demo.example;
 
 import android.app.Activity;
 import android.os.Bundle;
