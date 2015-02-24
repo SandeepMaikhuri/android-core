@@ -1,4 +1,20 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+    }
+}
+
+repositories {
+    maven { url 'http://download.fiveminutes.eu/maven' }
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+}
 
 android {
     compileSdkVersion 19
@@ -23,6 +39,7 @@ dependencies {
     compile project(':fiveminutes')
     provided 'com.jakewharton:butterknife:4.0.1'
     compile 'com.jakewharton:butterknife:4.0.1'
-    provided 'com.squareup.dagger:dagger-compiler:1.2.2'
-    compile 'com.squareup.dagger:dagger:1.2.2'
+    compile 'com.google.dagger:dagger:2.0-SNAPSHOT'
+    apt 'com.google.dagger:dagger-compiler:2.0-SNAPSHOT'
+    provided 'javax.annotation:jsr250-api:1.0'
 }

@@ -6,12 +6,10 @@ import android.os.Bundle;
 import java.util.ArrayList;
 import java.util.List;
 
-import dagger.ObjectGraph;
-
 public abstract class DaggerActivity extends Activity
         implements Injector {
 
-    private ObjectGraph activityGraph;
+    //private ObjectGraph activityGraph;
 
     @Override
     protected void onStart() {
@@ -26,10 +24,10 @@ public abstract class DaggerActivity extends Activity
         List<Object> modules = new ArrayList<Object>();
         modules.add(new ActivityScopeModule(this));
         modules.addAll(getActivityModules());
-        activityGraph = application.getObjectGraph().plus(modules.toArray());
+        //activityGraph = application.getObjectGraph().plus(modules.toArray());
 
         // Inject ourselves so subclasses will have dependencies fulfilled when this method returns.
-        activityGraph.inject(this);
+        //activityGraph.inject(this);
 
         super.onCreate(savedInstanceState);
     }
@@ -38,7 +36,7 @@ public abstract class DaggerActivity extends Activity
     protected void onDestroy() {
         // Eagerly clear the reference to the activity graph to allow it to be garbage collected as
         // soon as possible.
-        activityGraph = null;
+        //activityGraph = null;
 
         super.onDestroy();
     }
@@ -52,15 +50,15 @@ public abstract class DaggerActivity extends Activity
      */
     @Override
     public void inject(Object object) {
-        if (activityGraph != null) {
+        /*if (activityGraph != null) {
             activityGraph.inject(object);
-        }
+        }*/
     }
 
-    @Override
+    /*@Override
     public ObjectGraph getObjectGraph() {
         return activityGraph;
-    }
+    }*/
 
     protected abstract List<Object> getActivityModules();
 

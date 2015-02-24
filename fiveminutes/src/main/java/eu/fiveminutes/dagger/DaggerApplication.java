@@ -6,14 +6,12 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.List;
 
-import dagger.ObjectGraph;
-
 /**
  * Base class of a dagger enabled application
  */
 public abstract class DaggerApplication extends Application implements Injector {
 
-    private ObjectGraph objectGraph;
+    //private ObjectGraph objectGraph;
 
     @Override
     public void onCreate() {
@@ -30,22 +28,22 @@ public abstract class DaggerApplication extends Application implements Injector 
         //modules.add(new ThreadingModule());
         modules.addAll(getAppModules());
 
-        objectGraph = ObjectGraph.create(modules.toArray());
+        //objectGraph = ObjectGraph.create(modules.toArray());
 
-        objectGraph.inject(this);
+        //objectGraph.inject(this);
     }
 
     protected abstract List<Object> getAppModules();
 
     @Override
     public void inject(Object object) {
-        objectGraph.inject(object);
+       // objectGraph.inject(object);
     }
 
-    @Override
+    /*@Override
     public ObjectGraph getObjectGraph() {
         return objectGraph;
-    }
+    }*/
 
     public static void inject(Context context, Object object) {
         Context applicationContext = context.getApplicationContext();

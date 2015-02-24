@@ -1,6 +1,5 @@
 package eu.fiveminutes.dagger;
 
-import dagger.ObjectGraph;
 
 /**
  * An instance which is capable of injecting dependencies.
@@ -13,6 +12,6 @@ public interface Injector {
      */
     void inject(Object object);
 
-    ObjectGraph getObjectGraph();
+    //ObjectGraph getObjectGraph();
 
 }
