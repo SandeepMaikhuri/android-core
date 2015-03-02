@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--http://stackoverflow.com/a/9308284/3199693-->
+<resources>
+    <bool name="isTablet">false</bool>
+    <bool name="isLandscapeInTablet">false</bool>
+</resources>
