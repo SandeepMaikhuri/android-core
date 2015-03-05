@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.view.WindowManager;
 
+import javax.crypto.Mac;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -50,6 +51,12 @@ public class UtilsModule {
     @Singleton
     ColorUtils provideColorUtils() {
         return new ColorUtilsImpl();
+    }
+
+    @Provides
+    @Singleton
+    CryptoUtils provideCryptoUtils() {
+        return new CryptoUtilsImpl();
     }
 
     @Provides
