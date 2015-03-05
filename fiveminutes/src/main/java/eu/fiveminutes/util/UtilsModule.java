@@ -6,7 +6,6 @@ import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.view.WindowManager;
 
-import javax.crypto.Mac;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -88,6 +87,12 @@ public class UtilsModule {
     @Singleton
     IntentUtils provideIntentUtils(@ForApplication Context applicationContext) {
         return new IntentUtilsImpl(applicationContext);
+    }
+
+    @Provides
+    @Singleton
+    ListUtils provideListUtils() {
+        return new ListUtilsImpl();
     }
 
     @Provides
