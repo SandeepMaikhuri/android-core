@@ -1,6 +1,9 @@
 package eu.fiveminutes.util;
 
 import android.content.Context;
+import android.support.annotation.DrawableRes;
+import android.text.TextUtils;
+import android.widget.ImageView;
 
 import com.squareup.picasso.Cache;
 import com.squareup.picasso.LruCache;
@@ -34,6 +37,38 @@ public final class PicassoWrapper {
             }
         }
         return cache;
+    }
+
+    public static void loadFromUrlAndResize(Context context, String url, ImageView imageView,
+                                   @DrawableRes int placeHolderRes, int width, int height) {
+        if (!TextUtils.isEmpty(url)) {
+            with(context).load(url).resize(width, height).centerCrop()
+                    .placeholder(placeHolderRes).into(imageView);
+        } else {
+            with(context).load(placeHolderRes).resize(width, height).centerCrop().into(imageView);
+        }
+    }
+
+    public static void loadFromUrl(Context context, String url, ImageView imageView,
+                                   @DrawableRes int placeHolderRes) {
+        if (!TextUtils.isEmpty(url)) {
+            with(context).load(url).placeholder(placeHolderRes).into(imageView);
+        } else {
+            with(context).load(placeHolderRes).into(imageView);
+        }
+    }
+
+    public static void loadFromUrl(Context context, String url, ImageView imageView) {
+        if (!TextUtils.isEmpty(url)) {
+            PicassoWrapper.with(context).load(url).into(imageView);
+        }
+    }
+
+    public static void loadFromUrlAndResize(Context context, String url, ImageView imageView,
+                                   int width, int height) {
+        if (!TextUtils.isEmpty(url)) {
+            PicassoWrapper.with(context).load(url).resize(width, height).centerCrop().into(imageView);
+        }
     }
 }
 
