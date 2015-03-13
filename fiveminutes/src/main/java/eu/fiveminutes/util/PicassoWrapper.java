@@ -20,6 +20,7 @@ public final class PicassoWrapper {
             synchronized (PicassoWrapper.class) {
                 if (singleton == null) {
                     singleton = new Picasso.Builder(context)
+//                            .executor(Executors.newSingleThreadExecutor())
                             .memoryCache(getCache(context))
                             .build();
                 }
@@ -40,7 +41,7 @@ public final class PicassoWrapper {
     }
 
     public static void loadFromUrlAndResize(Context context, String url, ImageView imageView,
-                                   @DrawableRes int placeHolderRes, int width, int height) {
+                                            @DrawableRes int placeHolderRes, int width, int height) {
         if (!TextUtils.isEmpty(url)) {
             with(context).load(url).resize(width, height).centerCrop()
                     .placeholder(placeHolderRes).into(imageView);
@@ -65,7 +66,7 @@ public final class PicassoWrapper {
     }
 
     public static void loadFromUrlAndResize(Context context, String url, ImageView imageView,
-                                   int width, int height) {
+                                            int width, int height) {
         if (!TextUtils.isEmpty(url)) {
             PicassoWrapper.with(context).load(url).resize(width, height).centerCrop().into(imageView);
         }
