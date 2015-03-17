@@ -8,6 +8,8 @@ import java.util.regex.Pattern;
 
 public final class ColorUtilsImpl implements ColorUtils {
 
+    private static final int MAX_CHANNEL_VALUE = 255;
+
     private final Pattern rgbParserPattern;
 
     public ColorUtilsImpl() {
@@ -45,6 +47,12 @@ public final class ColorUtilsImpl implements ColorUtils {
     @Override
     public int addTransparencyToColor(int color, int alpha) {
         return Color.argb(alpha, Color.red(color), Color.green(color), Color.blue(color));
+    }
+
+    @Override
+    public int addTransparencyToColor(int color, float alpha) {
+        final int int_alpha = (int)(MAX_CHANNEL_VALUE * alpha);
+        return addTransparencyToColor(color, int_alpha);
     }
 
     @Override
