@@ -12,11 +12,11 @@ import eu.fiveminutes.events.EventBus;
 import eu.fiveminutes.events.EventBusImpl;
 
 @Module(
-        complete = false,
-        library = true,
-        injects = {
-                DaggerApplication.class
-        }
+//        complete = false,
+//        library = true,
+//        injects = {
+//                DaggerApplication.class
+//        }
 )
 public class ApplicationScopeModule {
 

@@ -6,14 +6,13 @@ package eu.fiveminutes.demo.common.module;
  */
 
 import dagger.Module;
-import eu.fiveminutes.dagger.ActivityScopeModule;
 
 @Module(
-        complete = true,    // Here we enable object graph validation
-        library = true,
-        addsTo = ActivityScopeModule.class, // Important for object graph validation at compile time
-        injects = {
-        }
+//        complete = true,    // Here we enable object graph validation
+//        library = true,
+//        addsTo = ActivityScopeModule.class, // Important for object graph validation at compile time
+//        injects = {
+//        }
 )
 public class DemoActivityScopeModule {
 }

@@ -9,18 +9,17 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import eu.fiveminutes.events.BusActivity;
 
 /**
  * Here it provides the dependencies those have same lifetime of one activity in your app
  */
 @Module(
-        complete = true,    // Here we enable object graph validation
-        library = true,
-        addsTo = ApplicationScopeModule.class, // Important for object graph validation at compile time
-        injects = {
-                DaggerActivity.class,
-        }
+//        complete = true,    // Here we enable object graph validation
+//        library = true,
+//        addsTo = ApplicationScopeModule.class, // Important for object graph validation at compile time
+//        injects = {
+//                DaggerActivity.class,
+//        }
 )
 public class ActivityScopeModule {
 
