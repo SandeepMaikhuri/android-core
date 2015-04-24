@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import com.squareup.picasso.Cache;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 public final class PicassoWrapper {
 
@@ -62,6 +63,18 @@ public final class PicassoWrapper {
     public static void loadFromUrl(Context context, String url, ImageView imageView) {
         if (!TextUtils.isEmpty(url)) {
             PicassoWrapper.with(context).load(url).into(imageView);
+        }
+    }
+
+    public static void loadFromUrl(Context context, String url, Target target) {
+        if (!TextUtils.isEmpty(url)) {
+            PicassoWrapper.with(context).load(url).into(target);
+        }
+    }
+
+    public static void loadFromUrl(Context context, String url, Target target, int width, int height) {
+        if (!TextUtils.isEmpty(url)) {
+            PicassoWrapper.with(context).load(url).resize(width, height).centerCrop().into(target);
         }
     }
 
