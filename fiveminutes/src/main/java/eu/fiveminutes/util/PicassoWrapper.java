@@ -78,6 +78,12 @@ public final class PicassoWrapper {
         }
     }
 
+    public static void loadFromUrl(Context context, String url, Target target, @DrawableRes int placeholder, int width, int height) {
+        if (!TextUtils.isEmpty(url)) {
+            PicassoWrapper.with(context).load(url).resize(width, height).placeholder(placeholder).centerCrop().into(target);
+        }
+    }
+
     public static void loadFromUrlAndResize(Context context, String url, ImageView imageView,
                                             int width, int height) {
         if (!TextUtils.isEmpty(url)) {
