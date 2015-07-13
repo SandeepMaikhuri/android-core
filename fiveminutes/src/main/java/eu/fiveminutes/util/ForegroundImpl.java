@@ -52,6 +52,8 @@ public final class ForegroundImpl implements Application.ActivityLifecycleCallba
     private List<Listener> listeners = new CopyOnWriteArrayList<Listener>();
     private Runnable check;
 
+    private String foregroundActivityName = "";
+
     public ForegroundImpl(Application application) {
         application.registerActivityLifecycleCallbacks(this);
     }
@@ -77,10 +79,16 @@ public final class ForegroundImpl implements Application.ActivityLifecycleCallba
     }
 
     @Override
+    public String getForegroundActivityName() {
+        return foregroundActivityName;
+    }
+
+    @Override
     public void onActivityResumed(Activity activity) {
         paused = false;
         boolean wasBackground = !foreground;
         foreground = true;
+        foregroundActivityName = activity.getClass().getCanonicalName();
 
         if (check != null)
             handler.removeCallbacks(check);
