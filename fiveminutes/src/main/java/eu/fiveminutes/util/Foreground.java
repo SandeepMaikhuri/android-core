@@ -2,13 +2,13 @@ package eu.fiveminutes.util;
 
 public interface Foreground {
 
-    String getForegroundActivityName();
+    Class<?> getForegroundActivityClass();
 
-    public interface Listener {
+    interface Listener {
 
-        public void onBecameForeground();
+        void onBecameForeground();
 
-        public void onBecameBackground();
+        void onBecameBackground();
 
     }
 

@@ -11,16 +11,16 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Usage:
- * <p/>
+ * <p>
  * 1. Get the ForegroundImpl Singleton, passing a Context or Application object unless you
  * are sure that the Singleton has definitely already been initialised elsewhere.
- * <p/>
+ * <p>
  * 2.a) Perform a direct, synchronous check: ForegroundImpl.isForeground() / .isBackground()
- * <p/>
+ * <p>
  * or
- * <p/>
+ * <p>
  * 2.b) Register to be notified (useful in Service or other non-UI components):
- * <p/>
+ * <p>
  * ForegroundImpl.Listener myListener = new ForegroundImpl.Listener(){
  * public void onBecameForeground(){
  * // ... whatever you want to do
@@ -29,12 +29,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * // ... whatever you want to do
  * }
  * }
- * <p/>
+ * <p>
  * public void onCreate(){
  * super.onCreate();
  * ForegroundImpl.get(this).addListener(listener);
  * }
- * <p/>
+ * <p>
  * public void onDestroy(){
  * super.onCreate();
  * ForegroundImpl.get(this).removeListener(listener);
@@ -52,7 +52,7 @@ public final class ForegroundImpl implements Application.ActivityLifecycleCallba
     private List<Listener> listeners = new CopyOnWriteArrayList<Listener>();
     private Runnable check;
 
-    private String foregroundActivityName = "";
+    private Class<?> foregroundActivityClass = null;
 
     public ForegroundImpl(Application application) {
         application.registerActivityLifecycleCallbacks(this);
@@ -79,8 +79,8 @@ public final class ForegroundImpl implements Application.ActivityLifecycleCallba
     }
 
     @Override
-    public String getForegroundActivityName() {
-        return foregroundActivityName;
+    public Class<?> getForegroundActivityClass() {
+        return foregroundActivityClass;
     }
 
     @Override
@@ -88,7 +88,7 @@ public final class ForegroundImpl implements Application.ActivityLifecycleCallba
         paused = false;
         boolean wasBackground = !foreground;
         foreground = true;
-        foregroundActivityName = activity.getClass().getCanonicalName();
+        foregroundActivityClass = activity.getClass();
 
         if (check != null)
             handler.removeCallbacks(check);
@@ -110,6 +110,7 @@ public final class ForegroundImpl implements Application.ActivityLifecycleCallba
     @Override
     public void onActivityPaused(Activity activity) {
         paused = true;
+        foregroundActivityClass = null;
 
         if (check != null)
             handler.removeCallbacks(check);
