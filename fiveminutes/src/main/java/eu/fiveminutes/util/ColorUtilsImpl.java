@@ -11,9 +11,11 @@ public final class ColorUtilsImpl implements ColorUtils {
     private static final int MAX_CHANNEL_VALUE = 255;
 
     private final Pattern rgbParserPattern;
+    private final Pattern hexParserPattern;
 
     public ColorUtilsImpl() {
         this.rgbParserPattern = Pattern.compile("rgb *\\( *([0-9]+), *([0-9]+), *([0-9]+) *\\)");
+        this.hexParserPattern = Pattern.compile("^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$");
     }
 
     @Override
@@ -40,8 +42,23 @@ public final class ColorUtilsImpl implements ColorUtils {
     }
 
     @Override
+    public String rgbToHexStringColor(String rgbString, int defaultColor) {
+
+        if(rgbParserPattern.matcher(rgbString).matches()) {
+            int color = rgbStringToColor(rgbString, defaultColor);
+            return toHexString(color);
+        }
+
+        if(hexParserPattern.matcher(rgbString).matches()) {
+            return rgbString;
+        }
+
+        return toHexString(defaultColor);
+    }
+
+    @Override
     public String toHexString(int intColor) {
-        return String.format("#%06X", 0xFFFFFF & intColor);
+        return String.format("#FF%06X", 0xFFFFFF & intColor);
     }
 
     @Override
@@ -57,6 +74,7 @@ public final class ColorUtilsImpl implements ColorUtils {
 
     @Override
     public int calculateComplementaryColor(int color) {
+
         // get existing colors
         int alpha = Color.alpha(color);
         int red = Color.red(color);

@@ -6,6 +6,8 @@ public interface ColorUtils {
 
     int hexStringToColor(String colorString, int defaultColor);
 
+    String rgbToHexStringColor(String rgbString, int defaultColor);
+
     String toHexString(int intColor);
 
     int addTransparencyToColor(int color, int alpha);
