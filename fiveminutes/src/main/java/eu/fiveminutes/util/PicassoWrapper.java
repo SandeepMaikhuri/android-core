@@ -44,8 +44,7 @@ public final class PicassoWrapper {
     public static void loadFromUrlAndResize(Context context, String url, ImageView imageView,
                                             @DrawableRes int placeHolderRes, int width, int height) {
         if (!TextUtils.isEmpty(url)) {
-            with(context).load(url).resize(width, height).centerCrop()
-                    .placeholder(placeHolderRes).into(imageView);
+            with(context).load(url).resize(width, height).placeholder(placeHolderRes).centerCrop().into(imageView);
         } else {
             with(context).load(placeHolderRes).resize(width, height).centerCrop().into(imageView);
         }
