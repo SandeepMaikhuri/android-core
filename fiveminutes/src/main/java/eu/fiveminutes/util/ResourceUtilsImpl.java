@@ -6,9 +6,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 
-import org.apache.http.util.ByteArrayBuffer;
-
-import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -94,23 +91,25 @@ public final class ResourceUtilsImpl implements ResourceUtils {
             return "";
         }
 
-        InputStream is = applicationContext.getResources().openRawResource(rawFileId);
-        BufferedInputStream bis = new BufferedInputStream(is);
+        return "";
 
-        ByteArrayBuffer baf = new ByteArrayBuffer(50);
-
-        int current = 0;
-        try {
-            while ((current = bis.read()) != -1) {
-                baf.append((byte) current);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "";
-        }
-
-        byte[] data = baf.toByteArray();
-        return new String(data);
+//        InputStream is = applicationContext.getResources().openRawResource(rawFileId);
+//        BufferedInputStream bis = new BufferedInputStream(is);
+//
+//        ByteArrayBuffer baf = new ByteArrayBuffer(50);
+//
+//        int current = 0;
+//        try {
+//            while ((current = bis.read()) != -1) {
+//                baf.append((byte) current);
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            return "";
+//        }
+//
+//        byte[] data = baf.toByteArray();
+//        return new String(data);
     }
 
     @Override
