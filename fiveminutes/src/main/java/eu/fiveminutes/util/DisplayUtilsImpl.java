@@ -13,7 +13,6 @@ public final class DisplayUtilsImpl implements DisplayUtils {
     private final Resources resources;
     private final WindowManager windowManager;
 
-    @Inject
     public DisplayUtilsImpl(Resources resources, WindowManager windowManager) {
         this.resources = resources;
         this.windowManager = windowManager;

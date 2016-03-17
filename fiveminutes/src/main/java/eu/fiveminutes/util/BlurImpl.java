@@ -10,13 +10,10 @@ import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
 import android.util.Log;
 
-import javax.inject.Inject;
-
 public final class BlurImpl implements Blur {
 
     private final Context context;
 
-    @Inject
     public BlurImpl(Context context) {
         this.context = context;
     }

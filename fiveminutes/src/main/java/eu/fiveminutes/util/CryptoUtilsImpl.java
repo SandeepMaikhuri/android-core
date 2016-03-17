@@ -13,7 +13,6 @@ public final class CryptoUtilsImpl implements CryptoUtils {
 
     private Mac macSha1Instance;
 
-    @Inject
     public CryptoUtilsImpl() {
         try {
             macSha1Instance = Mac.getInstance(HMAC_SHA1_ALGORITHM);

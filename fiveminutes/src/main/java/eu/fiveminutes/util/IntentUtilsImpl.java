@@ -12,16 +12,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import javax.inject.Inject;
-
-import eu.fiveminutes.dagger.ForApplication;
-
 public final class IntentUtilsImpl implements IntentUtils {
 
     private final Context applicationContext;
 
-    @Inject
-    public IntentUtilsImpl(@ForApplication Context applicationContext) {
+    public IntentUtilsImpl(Context applicationContext) {
         this.applicationContext = applicationContext;
     }
 

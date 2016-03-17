@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 
 public interface ResourceUtils {
+
     String STRING_RESOURCE = "string";
     String XML_RESOURCE = "xml";
     String DRAWABLE_RESOURCE = "drawable";

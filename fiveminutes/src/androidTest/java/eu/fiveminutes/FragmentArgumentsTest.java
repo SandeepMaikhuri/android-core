@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.test.AndroidTestCase;
 
-import eu.fiveminutes.ui.utils.FragmentArguments;
+import eu.fiveminutes.util.FragmentArguments;
 
 public class FragmentArgumentsTest extends AndroidTestCase {
 

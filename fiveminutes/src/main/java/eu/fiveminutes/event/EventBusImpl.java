@@ -1,4 +1,4 @@
-package eu.fiveminutes.events;
+package eu.fiveminutes.event;
 
 import android.os.Handler;
 import android.os.Looper;

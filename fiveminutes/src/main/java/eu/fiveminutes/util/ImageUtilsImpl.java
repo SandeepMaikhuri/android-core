@@ -38,7 +38,6 @@ public final class ImageUtilsImpl implements ImageUtils {
     private final ResourceUtils resourceUtils;
     private final WindowManager windowManager;
 
-    @Inject
     public ImageUtilsImpl(Resources resources, File filesDir,
                           Blur blur, ResourceUtils resourceUtils,
                           WindowManager windowManager) {

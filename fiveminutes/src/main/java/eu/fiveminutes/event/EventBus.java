@@ -1,4 +1,4 @@
-package eu.fiveminutes.events;
+package eu.fiveminutes.event;
 
 /**
  * Created by tomo on 10/22/14.

@@ -1,4 +1,4 @@
-package eu.fiveminutes.ui.utils;
+package eu.fiveminutes.ui.util;
 
 import android.content.Context;
 import android.graphics.Paint;

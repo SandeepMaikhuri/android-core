@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 import eu.fiveminutes.R;
-import eu.fiveminutes.ui.utils.TypefaceUtils;
+import eu.fiveminutes.ui.util.TypefaceUtils;
 
 
 /**

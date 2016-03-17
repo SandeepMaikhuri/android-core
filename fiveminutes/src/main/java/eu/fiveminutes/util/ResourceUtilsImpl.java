@@ -10,16 +10,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.inject.Inject;
-
-import eu.fiveminutes.dagger.ForApplication;
-
 public final class ResourceUtilsImpl implements ResourceUtils {
 
     private final Context applicationContext;
 
-    @Inject
-    public ResourceUtilsImpl(@ForApplication Context applicationContext) {
+    public ResourceUtilsImpl(Context applicationContext) {
         this.applicationContext = applicationContext;
     }
 

@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import eu.fiveminutes.R;
-import eu.fiveminutes.ui.utils.TypefaceUtils;
+import eu.fiveminutes.ui.util.TypefaceUtils;
 
 
 public class TypefacedPagerTabStrip extends PagerTabStrip implements TypefacedView {
