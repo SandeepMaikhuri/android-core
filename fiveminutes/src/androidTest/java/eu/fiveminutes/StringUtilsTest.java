@@ -6,8 +6,8 @@ import eu.fiveminutes.util.StringUtils;
 import eu.fiveminutes.util.StringUtilsImpl;
 
 public class StringUtilsTest extends AndroidTestCase {
-    public void test() {
 
+    public void test() {
         final StringUtils stringUtils = new StringUtilsImpl();
 
         assertTrue(stringUtils.isStringEmpty(""));

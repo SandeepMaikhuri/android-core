@@ -2,9 +2,11 @@ package eu.fiveminutes.util;
 
 public final class StringUtilsImpl implements StringUtils {
 
+    private static final String EMPTY = "";
+
     @Override
     public boolean isStringEmpty(String string) {
-        return string == null || "".equals(string);
+        return string == null || EMPTY.equals(string);
     }
 
     @Override

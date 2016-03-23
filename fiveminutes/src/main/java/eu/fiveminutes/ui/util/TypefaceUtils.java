@@ -19,11 +19,15 @@ import eu.fiveminutes.ui.TypefacedView;
 /**
  * Genereal purpose tools for applying custom typefaces.
  */
-public class TypefaceUtils {
+public final class TypefaceUtils {
+
     private static final String TAG = TypefaceUtils.class.getSimpleName();
 
     private static final Hashtable<String, Typeface> CACHE = new Hashtable<String, Typeface>();
 
+    private TypefaceUtils() {
+
+    }
 
     /**
      * Extracts the desired typeface from the given style attributes.
@@ -36,12 +40,11 @@ public class TypefaceUtils {
      * @param typefaceStyle Within the styleSet array, the id of "typeface." The value in specific xml attribute
      *                      should be the full filename of the AvailableTypeface, e.g. "GothamSSm-Book.otf".
      */
-    public static void extractAndApplyTypeface(TypefacedView typefacedView, Context context, AttributeSet attrs,
-                                               int[] styleSet, int typefaceStyle) {
+    public static void extractAndApplyTypeface(TypefacedView typefacedView, Context context, AttributeSet attrs, int[] styleSet, int typefaceStyle) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, styleSet);
         String availableTypefaceString = typedArray.getString(typefaceStyle);
 
-        if(TextUtils.isEmpty(availableTypefaceString)) {
+        if (TextUtils.isEmpty(availableTypefaceString)) {
             return;
         }
 
@@ -75,8 +78,7 @@ public class TypefaceUtils {
         }
 
         SpannableString spannableString = new SpannableString(text);
-        spannableString.setSpan(new TypefaceSpan(context, typefaceName), 0, spannableString.length(),
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new TypefaceSpan(context, typefaceName), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return spannableString;
     }
 
