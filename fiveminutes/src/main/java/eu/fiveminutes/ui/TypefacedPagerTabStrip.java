@@ -26,13 +26,13 @@ public class TypefacedPagerTabStrip extends PagerTabStrip implements TypefacedVi
         init(context, attrs);
     }
 
-    private void init(Context context, AttributeSet attrs) {
+    private void init(final Context context, final AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TypefacedTextView);
         typeface = typedArray.getString(R.styleable.TypefacedTextView_typeface);
     }
 
     @Override
-    public void setTypeface(Typeface typeface) {
+    public void setTypeface(final Typeface typeface) {
 
     }
 

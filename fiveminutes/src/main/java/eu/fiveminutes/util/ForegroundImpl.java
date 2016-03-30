@@ -2,12 +2,11 @@ package eu.fiveminutes.util;
 
 import android.app.Activity;
 import android.app.Application;
-import android.os.Bundle;
+import android.os.Build;
 import android.os.Handler;
-import android.util.Log;
 
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Usage:
@@ -40,119 +39,165 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * ForegroundImpl.get(this).removeListener(listener);
  * }
  */
-public final class ForegroundImpl implements Application.ActivityLifecycleCallbacks, Foreground {
+public final class ForegroundImpl extends SimpleActivityLifecycleCallbacks implements Foreground {
 
-    public static final long CHECK_DELAY = 1000L;
-    public static final String TAG = ForegroundImpl.class.getName();
+    private static final int FOREGROUND_CHECK_DELAY_PERIOD = 1500;
 
-//    private static ForegroundImpl instance;
+    private final Handler handler;
+    private final Set<Foreground.Listener> listeners = new HashSet<>();
 
-    private boolean foreground = false, paused = true;
-    private Handler handler = new Handler();
-    private List<Listener> listeners = new CopyOnWriteArrayList<Listener>();
+    private Class<?> foregroundActivityClass;
+
     private Runnable check;
 
-    private Class<?> foregroundActivityClass = null;
+    private boolean foreground;
+    private boolean paused = true;
 
-    public ForegroundImpl(Application application) {
-        application.registerActivityLifecycleCallbacks(this);
+    public ForegroundImpl(Application application, Handler handler) {
+        this.handler = handler;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            application.registerActivityLifecycleCallbacks(this);
+        }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void onActivityResumed(final Activity activity) {
+        super.onActivityResumed(activity);
+
+        final boolean wasBackground = !foreground;
+        resetVariablesUponActivityResume(activity.getClass());
+        removePendingDelayedForegroundChecks();
+
+        if (wasBackground) {
+            dispatchAppWentForeground();
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void onActivityPaused(final Activity activity) {
+        super.onActivityPaused(activity);
+        paused = true;
+        foregroundActivityClass = null;
+        removePendingDelayedForegroundChecks();
+        check = new DelayedForegroundCheck();
+        handler.postDelayed(check, FOREGROUND_CHECK_DELAY_PERIOD);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isForeground() {
         return foreground;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isBackground() {
-        return !foreground;
+        return !isForeground();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void addListener(Listener listener) {
+    public void addListener(final Listener listener) {
         listeners.add(listener);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void removeListener(Listener listener) {
+    public void removeListener(final Listener listener) {
         listeners.remove(listener);
     }
 
-    @Override
+    /**
+     * Method to retrieve {@link java.lang.Class} class for current foreground activity.
+     *
+     * @return {@link java.lang.Class} instance for current foreground activity.
+     */
     public Class<?> getForegroundActivityClass() {
         return foregroundActivityClass;
     }
 
-    @Override
-    public void onActivityResumed(Activity activity) {
+    /**
+     * When app is resumed, there by in foreground, we want to pull information about current
+     * foreground activity instance and set appropriate flags.
+     *
+     * @param foregroundActivityClass class file of activity that became foreground.
+     */
+    private void resetVariablesUponActivityResume(final Class<?> foregroundActivityClass) {
         paused = false;
-        boolean wasBackground = !foreground;
         foreground = true;
-        foregroundActivityClass = activity.getClass();
+        this.foregroundActivityClass = foregroundActivityClass;
+    }
 
-        if (check != null)
-            handler.removeCallbacks(check);
-
-        if (wasBackground) {
-            Log.i(TAG, "went foreground");
-            for (Listener l : listeners) {
-                try {
-                    l.onBecameForeground();
-                } catch (Exception exc) {
-                    Log.e(TAG, "Listener threw exception!", exc);
-                }
-            }
-        } else {
-            Log.i(TAG, "still foreground");
+    /**
+     * Informs all registered listeners that app went to foreground.
+     */
+    private void dispatchAppWentForeground() {
+        for (Listener listener : listeners) {
+            listener.onBecameForeground();
         }
     }
 
-    @Override
-    public void onActivityPaused(Activity activity) {
-        paused = true;
-        foregroundActivityClass = null;
+    /**
+     * Informs all registered listeners that app went to background.
+     */
+    private void dispatchAppWentBackground() {
+        for (Listener listener : listeners) {
+            listener.onBecameBackground();
+        }
+    }
 
-        if (check != null)
+    /**
+     * Removes scheduled delayed foreground check from handler queue. One of the reasons why we might do this is
+     * because app went to foreground again before this check executed.
+     */
+    private void removePendingDelayedForegroundChecks() {
+        if (check != null) {
             handler.removeCallbacks(check);
+            check = null;
+        }
+    }
 
-        handler.postDelayed(check = new Runnable() {
-            @Override
-            public void run() {
-                if (foreground && paused) {
-                    foreground = false;
-                    Log.i(TAG, "went background");
-                    for (Listener l : listeners) {
-                        try {
-                            l.onBecameBackground();
-                        } catch (Exception exc) {
-                            Log.e(TAG, "Listener threw exception!", exc);
-                        }
-                    }
-                } else {
-                    Log.i(TAG, "still foreground");
-                }
+    /**
+     * <p>
+     * {@link java.lang.Runnable} implementation that checks whether app is currently in background.
+     * </p>
+     * <p>
+     * We need this because of transition between activities. When one activity closes {@link android.app.Application.ActivityLifecycleCallbacks#onActivityPaused(Activity)}
+     * will be invoked and therefore we might think we went to background. However, right after that
+     * {@link android.app.Application.ActivityLifecycleCallbacks#onActivityResumed(Activity)} from next activity will be invoked.
+     * </p>
+     * <p>
+     * To tackle this, we don't invoke {@link android.app.Application.ActivityLifecycleCallbacks#onActivityPaused(Activity)} when it happens,
+     * but from this delayed check runnable when we are sure it happened.
+     * </p>
+     */
+    private final class DelayedForegroundCheck implements Runnable {
+        @Override
+        public void run() {
+            //After delayed run, we check whether app is still in background. If so, dispatch event to listeners.
+            if (isAppStillInBackground()) {
+                foreground = false;
+                dispatchAppWentBackground();
             }
-        }, CHECK_DELAY);
-    }
+        }
 
-    @Override
-    public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-    }
-
-    @Override
-    public void onActivityStarted(Activity activity) {
-    }
-
-    @Override
-    public void onActivityStopped(Activity activity) {
-    }
-
-    @Override
-    public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-    }
-
-    @Override
-    public void onActivityDestroyed(Activity activity) {
+        private boolean isAppStillInBackground() {
+            return foreground && paused;
+        }
     }
 }
 

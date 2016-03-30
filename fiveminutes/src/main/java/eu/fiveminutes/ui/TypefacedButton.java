@@ -33,5 +33,4 @@ public class TypefacedButton extends Button implements TypefacedView {
         super(context, attrs, defStyleAttr, defStyleRes);
         TypefaceUtils.extractAndApplyTypeface(this, context, attrs, R.styleable.TypefacedButton, R.styleable.TypefacedButton_typeface);
     }
-
 }

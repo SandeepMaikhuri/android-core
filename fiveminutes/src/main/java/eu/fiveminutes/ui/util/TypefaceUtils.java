@@ -1,5 +1,6 @@
 package eu.fiveminutes.ui.util;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
@@ -17,13 +18,13 @@ import java.util.Hashtable;
 import eu.fiveminutes.ui.TypefacedView;
 
 /**
- * Genereal purpose tools for applying custom typefaces.
+ * General purpose tools for applying custom typefaces.
  */
 public final class TypefaceUtils {
 
     private static final String TAG = TypefaceUtils.class.getSimpleName();
 
-    private static final Hashtable<String, Typeface> CACHE = new Hashtable<String, Typeface>();
+    private static final Hashtable<String, Typeface> CACHE = new Hashtable<>();
 
     private TypefaceUtils() {
 
@@ -40,15 +41,16 @@ public final class TypefaceUtils {
      * @param typefaceStyle Within the styleSet array, the id of "typeface." The value in specific xml attribute
      *                      should be the full filename of the AvailableTypeface, e.g. "GothamSSm-Book.otf".
      */
+    @SuppressLint("Recycle")
     public static void extractAndApplyTypeface(TypefacedView typefacedView, Context context, AttributeSet attrs, int[] styleSet, int typefaceStyle) {
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, styleSet);
-        String availableTypefaceString = typedArray.getString(typefaceStyle);
+        final TypedArray typedArray = context.obtainStyledAttributes(attrs, styleSet);
+        final String availableTypefaceString = typedArray.getString(typefaceStyle);
 
         if (TextUtils.isEmpty(availableTypefaceString)) {
             return;
         }
 
-        Typeface typeFace = getTypeface(context, availableTypefaceString);
+        final Typeface typeFace = getTypeface(context, availableTypefaceString);
         if (typeFace != null) {
             typefacedView.setTypeface(typeFace);
         }
@@ -64,7 +66,7 @@ public final class TypefaceUtils {
                 continue;
             }
 
-            MenuItem menuItem = menu.getItem(i);
+            final MenuItem menuItem = menu.getItem(i);
             menuItem.setTitle(applyTypeFaceToText(context, menuItem.getTitle(), typefaceName));
         }
     }
@@ -77,32 +79,29 @@ public final class TypefaceUtils {
             return new SpannableString(text);
         }
 
-        SpannableString spannableString = new SpannableString(text);
+        final SpannableString spannableString = new SpannableString(text);
         spannableString.setSpan(new TypefaceSpan(context, typefaceName), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
         return spannableString;
     }
 
     public static Typeface getTypeface(Context context, String typefaceName) {
         try {
-
             synchronized (CACHE) {
                 if (CACHE.containsKey(typefaceName)) {
                     return CACHE.get(typefaceName);
                 }
-
             }
 
-            String assetName = "fonts/" + typefaceName;
+            final String assetName = "fonts/" + typefaceName;
+            final Typeface typeface = Typeface.createFromAsset(context.getAssets(), assetName);
 
-            Typeface typeface = Typeface.createFromAsset(context.getAssets(), assetName);
             CACHE.put(typefaceName, typeface);
+
             return typeface;
         } catch (Exception e) {
-
             Log.e(TAG, "Could not create typeface from " + typefaceName, e);
             return null;
         }
     }
-
-
 }

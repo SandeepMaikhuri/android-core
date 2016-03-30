@@ -5,7 +5,6 @@ import java.util.Formatter;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-import javax.inject.Inject;
 
 public final class CryptoUtilsImpl implements CryptoUtils {
 
@@ -39,6 +38,7 @@ public final class CryptoUtilsImpl implements CryptoUtils {
             result = toHexString(rawHmac);
 
         } catch (Exception e) {
+
         }
         return result;
     }

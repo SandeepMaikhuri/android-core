@@ -12,8 +12,6 @@ import android.graphics.Point;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.os.Build;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
@@ -25,8 +23,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
-import javax.inject.Inject;
 
 public final class ImageUtilsImpl implements ImageUtils {
 
@@ -46,7 +42,6 @@ public final class ImageUtilsImpl implements ImageUtils {
         this.resources = resources;
         this.filesDir = filesDir;
         this.windowManager = windowManager;
-//        windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
     }
 
     /**
@@ -125,45 +120,6 @@ public final class ImageUtilsImpl implements ImageUtils {
     @Override
     public String getImageName(int resId) {
         return resId + "_cached.png";
-    }
-
-    @Override
-    public void getBlurredImage(final int bitmapRes, final String nameToSave, final int radius,
-                                final ImageUtilsImpl.BlurEffectListener listener) {
-        new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                File saveFile = new File(filesDir, nameToSave);
-                Bitmap blurredBitmap = null;
-                if (!saveFile.exists()) {
-                    try {
-                        Bitmap orgBitmap = BitmapFactory.decodeResource(
-                                resources, bitmapRes);
-                        blurredBitmap = blur.fastblur(orgBitmap,
-                                radius);
-                        saveFile.createNewFile();
-                        storeImage(blurredBitmap, saveFile);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                } else {
-                    blurredBitmap = BitmapFactory.decodeFile(saveFile
-                            .getAbsolutePath());
-                }
-                final Bitmap tempBitmap = blurredBitmap;
-                Handler handler = new Handler(Looper.getMainLooper());
-                handler.post(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        listener.onDone(tempBitmap);
-                    }
-                });
-
-            }
-        }).start();
     }
 
     @Override
@@ -269,9 +225,5 @@ public final class ImageUtilsImpl implements ImageUtils {
                 return "circle transf " + filename;
             }
         };
-    }
-
-    public static interface BlurEffectListener {
-        public void onDone(Bitmap bitmap);
     }
 }

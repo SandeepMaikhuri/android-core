@@ -24,9 +24,6 @@ public interface ImageUtils {
 
     String getImageName(int resId);
 
-    void getBlurredImage(int bitmapRes, String nameToSave, int radius,
-                         ImageUtilsImpl.BlurEffectListener listener);
-
     Bitmap getBlurredImage(Bitmap orgBitmap, String nameToSave, int radius);
 
     Transformation blurTransformation(String fileName);
