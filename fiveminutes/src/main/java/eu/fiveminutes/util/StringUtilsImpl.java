@@ -5,12 +5,12 @@ public final class StringUtilsImpl implements StringUtils {
     private static final String EMPTY = "";
 
     @Override
-    public boolean isStringEmpty(String string) {
+    public boolean isStringEmpty(final String string) {
         return string == null || EMPTY.equals(string);
     }
 
     @Override
-    public String arrayToCsvString(String[] values) {
+    public String arrayToCsvString(final String[] values) {
         String csv = "";
         for (int i = 0; i < values.length; i++) {
             csv = csv.concat(values[i]);

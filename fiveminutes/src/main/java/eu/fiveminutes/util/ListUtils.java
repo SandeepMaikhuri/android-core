@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface ListUtils {
 
-    public boolean isEmpty(List list);
+    boolean isEmpty(List list);
 }
