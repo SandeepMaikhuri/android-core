@@ -14,9 +14,15 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-final class DummyScheduledExecutorService implements ScheduledExecutorService {
+final class StubScheduledExecutorService implements ScheduledExecutorService {
 
     private final Queue<Runnable> runnableQueue = new ArrayBlockingQueue<>(100);
+
+    private final ScheduledExecutorService proxyService;
+
+    public StubScheduledExecutorService(final ScheduledExecutorService proxyService) {
+        this.proxyService = proxyService;
+    }
 
     public void executeNext() {
         runnableQueue.poll().run();
@@ -25,9 +31,10 @@ final class DummyScheduledExecutorService implements ScheduledExecutorService {
     @NonNull
     @Override
     public ScheduledFuture<?> schedule(final Runnable command, final long delay, final TimeUnit unit) {
+        proxyService.schedule(command, delay, unit);
         runnableQueue.add(command);
 
-        return new DummyScheduledFuture(command) {
+        return new StubScheduledFuture(command) {
             @Override
             public boolean cancel(final boolean mayInterruptIfRunning) {
                 return runnableQueue.remove(command);
@@ -96,7 +103,7 @@ final class DummyScheduledExecutorService implements ScheduledExecutorService {
     public Future<?> submit(final Runnable task) {
         task.run();
 
-        return new DummyScheduledFuture(task);
+        return new StubScheduledFuture(task);
     }
 
     @NonNull

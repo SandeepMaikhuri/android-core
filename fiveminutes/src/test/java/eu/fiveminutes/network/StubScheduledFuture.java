@@ -6,11 +6,11 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-class DummyScheduledFuture implements ScheduledFuture<Runnable> {
+class StubScheduledFuture implements ScheduledFuture<Runnable> {
 
     private final Runnable runnable;
 
-    public DummyScheduledFuture(final Runnable runnable) {
+    public StubScheduledFuture(final Runnable runnable) {
         this.runnable = runnable;
     }
 
@@ -41,7 +41,7 @@ class DummyScheduledFuture implements ScheduledFuture<Runnable> {
 
     @Override
     public Runnable get() throws InterruptedException, ExecutionException {
-        return null;
+        return runnable;
     }
 
     @Override

@@ -8,10 +8,9 @@ import java.util.concurrent.TimeUnit;
 
 public final class NetworkConnectionSurveillanceImpl implements NetworkConnectionSurveillance {
 
-    private static final long DELAY_TIME_WITH_INTERNET = TimeUnit.MINUTES.toMillis(1L);
-    private static final long DELAY_TIME_NO_INTERNET = TimeUnit.SECONDS.toMillis(2L);
-
-    private static final long NO_DELAY = 0L;
+    static final long DELAY_TIME_WITH_INTERNET = TimeUnit.MINUTES.toSeconds(1L);
+    static final long DELAY_TIME_NO_INTERNET = TimeUnit.SECONDS.toSeconds(2L);
+    static final long NO_DELAY = 0L;
 
     private final ConnectivityInformation connectivityInformation;
     private final InternetAddressResolver internetAddressResolver;
@@ -29,12 +28,16 @@ public final class NetworkConnectionSurveillanceImpl implements NetworkConnectio
         this.connectivityInformation = connectivityInformation;
         this.internetAddressResolver = internetAddressResolver;
         this.executorService = executorService;
-        forceCheck();
+        executeCheckNow();
     }
 
     @Override
     public boolean hasInternetConnection() {
         return hasInternetConnection;
+    }
+
+    private void executeCheckNow() {
+        scheduleCheck(NO_DELAY);
     }
 
     @Override
