@@ -11,6 +11,9 @@ public final class ConnectivityInformationImpl implements ConnectivityInformatio
         this.connectivityManager = connectivityManager;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isConnectedToNetwork() {
         final NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
