@@ -1,6 +1,6 @@
 package eu.fiveminutes.network;
 
-interface ConnectivityInformation {
+public interface ConnectivityInformation {
 
     boolean isConnectedToNetwork();
 }

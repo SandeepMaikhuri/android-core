@@ -3,7 +3,7 @@ package eu.fiveminutes.network;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-final class InternetAddressResolverImpl implements InternetAddressResolver {
+public final class InternetAddressResolverImpl implements InternetAddressResolver {
 
     private static final String EMPTY = "";
 
