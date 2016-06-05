@@ -26,7 +26,8 @@ public final class NetworkConnectionSurveillanceTest {
     @Test
     public void testNoInternetConnectionIfNotConnectedToNetwork() {
         Mockito.when(connectivityInformation.isConnectedToNetwork()).thenReturn(false);
-        networkConnectionSurveillance.forceCheck();
+        Mockito.when(addressResolver.canResolveAddress()).thenReturn(false);
+        scheduledExecutorService.executeNext();
 
         Assert.assertFalse(networkConnectionSurveillance.hasInternetConnection());
     }
@@ -35,7 +36,6 @@ public final class NetworkConnectionSurveillanceTest {
     public void testNoInternetConnectionIfConnectedToNetworkButNoInternet() {
         Mockito.when(connectivityInformation.isConnectedToNetwork()).thenReturn(true);
         Mockito.when(addressResolver.canResolveAddress()).thenReturn(false);
-        networkConnectionSurveillance.forceCheck();
         scheduledExecutorService.executeNext();
 
         Assert.assertFalse(networkConnectionSurveillance.hasInternetConnection());
@@ -45,7 +45,6 @@ public final class NetworkConnectionSurveillanceTest {
     public void testNoInternetConnectionIfConnectedToNetworkAndHasInternet() {
         Mockito.when(connectivityInformation.isConnectedToNetwork()).thenReturn(true);
         Mockito.when(addressResolver.canResolveAddress()).thenReturn(true);
-        networkConnectionSurveillance.forceCheck();
         scheduledExecutorService.executeNext();
 
         Assert.assertTrue(networkConnectionSurveillance.hasInternetConnection());
@@ -55,9 +54,8 @@ public final class NetworkConnectionSurveillanceTest {
     public void testObserverNotifiedWhenSubscribedNoInternet() {
         Mockito.when(connectivityInformation.isConnectedToNetwork()).thenReturn(true);
         Mockito.when(addressResolver.canResolveAddress()).thenReturn(false);
-        networkConnectionSurveillance.forceCheck();
-        scheduledExecutorService.executeNext();
 
+        scheduledExecutorService.executeNext();
         networkConnectionSurveillance.registerObserver(observer);
 
         Mockito.verify(observer).connectivityChange(false);
@@ -67,9 +65,8 @@ public final class NetworkConnectionSurveillanceTest {
     public void testObserverNotifiedWhenSubscribedWithInternet() {
         Mockito.when(connectivityInformation.isConnectedToNetwork()).thenReturn(true);
         Mockito.when(addressResolver.canResolveAddress()).thenReturn(true);
-        networkConnectionSurveillance.forceCheck();
-        scheduledExecutorService.executeNext();
 
+        scheduledExecutorService.executeNext();
         networkConnectionSurveillance.registerObserver(observer);
 
         Mockito.verify(observer).connectivityChange(true);
@@ -79,9 +76,8 @@ public final class NetworkConnectionSurveillanceTest {
     public void testObserverNotNotifiedWhenNoConnectionChange() {
         Mockito.when(connectivityInformation.isConnectedToNetwork()).thenReturn(true);
         Mockito.when(addressResolver.canResolveAddress()).thenReturn(true);
-        networkConnectionSurveillance.forceCheck();
-        scheduledExecutorService.executeNext();
 
+        scheduledExecutorService.executeNext();
         networkConnectionSurveillance.registerObserver(observer);
 
         scheduledExecutorService.executeNext();
@@ -92,12 +88,11 @@ public final class NetworkConnectionSurveillanceTest {
     }
 
     @Test
-    public void testObserverNotNotifiedWhenConnectionChange() {
+    public void testObserverNotNotifiedWhenConnectionChangeFromConnectedToNotConnected() {
         Mockito.when(connectivityInformation.isConnectedToNetwork()).thenReturn(true);
         Mockito.when(addressResolver.canResolveAddress()).thenReturn(true);
-        networkConnectionSurveillance.forceCheck();
-        scheduledExecutorService.executeNext();
 
+        scheduledExecutorService.executeNext();
         networkConnectionSurveillance.registerObserver(observer);
 
         Mockito.when(addressResolver.canResolveAddress()).thenReturn(false);
@@ -108,17 +103,30 @@ public final class NetworkConnectionSurveillanceTest {
     }
 
     @Test
+    public void testObserverNotNotifiedWhenConnectionChangeFromNotConnectedToConnected() {
+        Mockito.when(connectivityInformation.isConnectedToNetwork()).thenReturn(true);
+        Mockito.when(addressResolver.canResolveAddress()).thenReturn(false);
+
+        scheduledExecutorService.executeNext();
+        networkConnectionSurveillance.registerObserver(observer);
+
+        Mockito.when(addressResolver.canResolveAddress()).thenReturn(true);
+        scheduledExecutorService.executeNext();
+
+        Mockito.verify(observer, Mockito.times(1)).connectivityChange(true);
+        Mockito.verify(observer, Mockito.times(1)).connectivityChange(false);
+    }
+
+    @Test
     public void testUnregisterObserver() {
         Mockito.when(connectivityInformation.isConnectedToNetwork()).thenReturn(true);
         Mockito.when(addressResolver.canResolveAddress()).thenReturn(true);
-        networkConnectionSurveillance.forceCheck();
-        scheduledExecutorService.executeNext();
 
+        scheduledExecutorService.executeNext();
         networkConnectionSurveillance.registerObserver(observer);
         networkConnectionSurveillance.unregisterObserver(observer);
 
         Mockito.when(addressResolver.canResolveAddress()).thenReturn(false);
-        networkConnectionSurveillance.forceCheck();
         scheduledExecutorService.executeNext();
 
         Mockito.verify(observer, Mockito.times(1)).connectivityChange(true);

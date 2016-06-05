@@ -8,7 +8,9 @@ import java.util.concurrent.TimeUnit;
 
 public final class NetworkConnectionSurveillanceImpl implements NetworkConnectionSurveillance {
 
-    private static final long DELAY_TIME = TimeUnit.SECONDS.toMillis(5L);
+    private static final long DELAY_TIME_WITH_INTERNET = TimeUnit.MINUTES.toMillis(1L);
+    private static final long DELAY_TIME_NO_INTERNET = TimeUnit.SECONDS.toMillis(2L);
+
     private static final long NO_DELAY = 0L;
 
     private final ConnectivityInformation connectivityInformation;
@@ -27,6 +29,7 @@ public final class NetworkConnectionSurveillanceImpl implements NetworkConnectio
         this.connectivityInformation = connectivityInformation;
         this.internetAddressResolver = internetAddressResolver;
         this.executorService = executorService;
+        forceCheck();
     }
 
     @Override
@@ -36,10 +39,11 @@ public final class NetworkConnectionSurveillanceImpl implements NetworkConnectio
 
     @Override
     public void forceCheck() {
+        dismissOldFuture();
         if (!connectivityInformation.isConnectedToNetwork()) {
             hasInternetConnection = false;
+            scheduleCheck(DELAY_TIME_NO_INTERNET);
         } else {
-            dismissOldFuture();
             scheduleCheck(NO_DELAY);
         }
     }
@@ -63,7 +67,7 @@ public final class NetworkConnectionSurveillanceImpl implements NetworkConnectio
     }
 
     private boolean canResolveAddress() {
-        return internetAddressResolver.canResolveAddress();
+        return connectivityInformation.isConnectedToNetwork() && internetAddressResolver.canResolveAddress();
     }
 
     private void notifyObserverForConnectionChange() {
@@ -73,10 +77,10 @@ public final class NetworkConnectionSurveillanceImpl implements NetworkConnectio
     }
 
     private void enqueueDelayed() {
-        if (!connectivityInformation.isConnectedToNetwork()) {
-            hasInternetConnection = false;
+        if (!hasInternetConnection) {
+            scheduleCheck(DELAY_TIME_NO_INTERNET);
         } else {
-            scheduleCheck(DELAY_TIME);
+            scheduleCheck(DELAY_TIME_WITH_INTERNET);
         }
     }
 
