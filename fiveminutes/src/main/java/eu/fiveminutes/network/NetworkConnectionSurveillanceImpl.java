@@ -14,21 +14,22 @@ public final class NetworkConnectionSurveillanceImpl implements NetworkConnectio
 
     private final ConnectivityInformation connectivityInformation;
     private final InternetAddressResolver internetAddressResolver;
+    private final MainThreadExecutor mainThreadExecutor;
     private final ScheduledExecutorService executorService;
 
     private final Set<Observer> observers = new HashSet<>();
-    private final Runnable connectivityChecker = new ConnectivityChecker();
 
     private ScheduledFuture scheduledFuture;
 
     private boolean hasInternetConnection;
 
     public NetworkConnectionSurveillanceImpl(final ConnectivityInformation connectivityInformation, final InternetAddressResolver internetAddressResolver,
-                                             final ScheduledExecutorService executorService) {
+                                             final MainThreadExecutor mainThreadExecutor, final ScheduledExecutorService executorService) {
         this.connectivityInformation = connectivityInformation;
         this.internetAddressResolver = internetAddressResolver;
+        this.mainThreadExecutor = mainThreadExecutor;
         this.executorService = executorService;
-        executeCheckNow();
+        executeNow();
     }
 
     @Override
@@ -36,19 +37,14 @@ public final class NetworkConnectionSurveillanceImpl implements NetworkConnectio
         return hasInternetConnection;
     }
 
-    private void executeCheckNow() {
-        scheduleCheck(NO_DELAY);
-    }
-
     @Override
     public void forceCheck() {
         dismissOldFuture();
-        if (!connectivityInformation.isConnectedToNetwork()) {
-            hasInternetConnection = false;
-            scheduleCheck(DELAY_TIME_NO_INTERNET);
-        } else {
-            scheduleCheck(NO_DELAY);
-        }
+        executeNow();
+    }
+
+    private void executeNow() {
+        executorService.execute(new ConnectivityChecker());
     }
 
     private void dismissOldFuture() {
@@ -74,13 +70,18 @@ public final class NetworkConnectionSurveillanceImpl implements NetworkConnectio
     }
 
     private void notifyObserverForConnectionChange() {
-        for (final Observer observer : observers) {
-            observer.connectivityChange(hasInternetConnection());
-        }
+        mainThreadExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                for (final Observer observer : observers) {
+                    observer.connectivityChange(hasInternetConnection());
+                }
+            }
+        });
     }
 
     private void enqueueDelayed() {
-        if (!hasInternetConnection) {
+        if (!hasInternetConnection()) {
             scheduleCheck(DELAY_TIME_NO_INTERNET);
         } else {
             scheduleCheck(DELAY_TIME_WITH_INTERNET);
@@ -88,7 +89,7 @@ public final class NetworkConnectionSurveillanceImpl implements NetworkConnectio
     }
 
     private void scheduleCheck(final long delay) {
-        scheduledFuture = executorService.schedule(connectivityChecker, delay, TimeUnit.SECONDS);
+        scheduledFuture = executorService.schedule(new ConnectivityChecker(), delay, TimeUnit.SECONDS);
     }
 
     private final class ConnectivityChecker implements Runnable {

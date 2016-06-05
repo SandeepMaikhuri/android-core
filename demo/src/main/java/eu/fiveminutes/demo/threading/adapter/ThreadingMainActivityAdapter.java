@@ -14,7 +14,7 @@ import javax.inject.Inject;
 public final class ThreadingMainActivityAdapter extends ArrayAdapter<String> {
 
     @Inject
-    public ThreadingMainActivityAdapter(Context context, int resource, List<String> objects) {
+    public ThreadingMainActivityAdapter(final Context context, final int resource, final List<String> objects) {
         super(context, resource, objects);
     }
 

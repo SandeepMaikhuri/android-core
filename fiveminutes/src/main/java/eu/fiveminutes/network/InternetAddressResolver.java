@@ -1,6 +1,6 @@
 package eu.fiveminutes.network;
 
-interface InternetAddressResolver {
+public interface InternetAddressResolver {
 
     boolean canResolveAddress();
 }
