@@ -133,6 +133,7 @@ final class StubScheduledExecutorService implements ScheduledExecutorService {
 
     @Override
     public void execute(final Runnable command) {
+        proxyService.execute(command);
         command.run();
     }
 }
