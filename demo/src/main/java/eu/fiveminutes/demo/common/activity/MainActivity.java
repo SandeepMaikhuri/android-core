@@ -21,7 +21,7 @@ public class MainActivity extends ListActivity {
 
     private ListAdapter buildListAdapter() {
         List<String> items = new ArrayList<String>();
-        for (Class<?> demo : Activities.classes) {
+        for (Class<?> demo : Activities.CLASSES) {
             items.add(demo.getSimpleName().replaceFirst("Activity", ""));
         }
         return new ArrayAdapter<String>(
@@ -33,7 +33,7 @@ public class MainActivity extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        Intent intent = new Intent(this, Activities.classes[position]);
+        Intent intent = new Intent(this, Activities.CLASSES[position]);
         startActivity(intent);
     }
 }

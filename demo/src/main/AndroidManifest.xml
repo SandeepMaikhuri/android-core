@@ -2,33 +2,35 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="eu.fiveminutes.demo" >
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:name=".common.application.DemoApplication">
+        android:theme="@style/AppTheme">
+
         <activity
             android:name=".common.activity.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".example.ExampleActivity"
-            android:label="@string/title_activity_string_util" >
-        </activity>
+            android:label="@string/title_activity_string_util" />
+
         <activity
             android:name=".fonts.CustomFontActivity"
-            android:label="@string/title_activity_custom_font" >
-        </activity>
+            android:label="@string/title_activity_custom_font" />
+
         <activity
-            android:name=".threading.activity.ThreadingMainActivity"
-            android:label="@string/title_activity_threading_main" >
-        </activity>
+            android:name=".example.NetworkSurveillanceActivity"/>
+
     </application>
 
 </manifest>
