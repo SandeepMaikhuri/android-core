@@ -8,6 +8,7 @@ import com.squareup.otto.Bus;
 
 import javax.inject.Inject;
 
+@Deprecated
 public final class EventBusImpl implements EventBus {
 
     private static final String TAG = EventBusImpl.class.getSimpleName();
