@@ -1,9 +1,6 @@
-package eu.fiveminutes;
+package eu.fiveminutes.util;
 
 import android.test.AndroidTestCase;
-
-import eu.fiveminutes.util.StringUtils;
-import eu.fiveminutes.util.StringUtilsImpl;
 
 public class StringUtilsTest extends AndroidTestCase {
 
