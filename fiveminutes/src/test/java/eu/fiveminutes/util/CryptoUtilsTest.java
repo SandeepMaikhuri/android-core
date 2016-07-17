@@ -1,6 +1,13 @@
 package eu.fiveminutes.util;
 
+import junit.framework.Assert;
+
+import org.junit.Test;
+
 public final class CryptoUtilsTest {
 
-    //TODO
+    @Test
+    public void test() {
+        Assert.assertTrue(true);
+    }
 }
