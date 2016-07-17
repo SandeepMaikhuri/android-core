@@ -19,37 +19,41 @@ public final class ColorUtilsImpl implements ColorUtils {
     }
 
     @Override
-    public int rgbStringToColor(String colorString, int defaultColor) {
+    public int rgbStringToColor(final String colorString, final int defaultColor) {
 
         if (TextUtils.isEmpty(colorString)) {
             return defaultColor;
         }
 
-        Matcher m = rgbParserPattern.matcher(colorString);
+        final Matcher m = rgbParserPattern.matcher(colorString);
         if (m.matches()) {
             return Color.argb(255, //alpha
-                    Integer.valueOf(m.group(1)),  // r
-                    Integer.valueOf(m.group(2)),  // g
-                    Integer.valueOf(m.group(3))); // b
+                              Integer.valueOf(m.group(1)),  // r
+                              Integer.valueOf(m.group(2)),  // g
+                              Integer.valueOf(m.group(3))); // b
+        } else {
+            return defaultColor;
         }
-
-        return defaultColor;
     }
 
     @Override
-    public int hexStringToColor(String colorString, int defaultColor) {
-        return !TextUtils.isEmpty(colorString) ? Color.parseColor(colorString) : defaultColor;
+    public int hexStringToColor(final String colorString, final int defaultColor) {
+        try {
+            return !TextUtils.isEmpty(colorString) ? Color.parseColor(colorString) : defaultColor;
+        } catch (final Exception e) {
+            return defaultColor;
+        }
     }
 
     @Override
-    public String rgbToHexStringColor(String rgbString, int defaultColor) {
+    public String rgbToHexStringColor(final String rgbString, final int defaultColor) {
 
-        if(rgbParserPattern.matcher(rgbString).matches()) {
+        if (rgbParserPattern.matcher(rgbString).matches()) {
             int color = rgbStringToColor(rgbString, defaultColor);
             return toHexString(color);
         }
 
-        if(hexParserPattern.matcher(rgbString).matches()) {
+        if (hexParserPattern.matcher(rgbString).matches()) {
             return rgbString;
         }
 
@@ -57,23 +61,32 @@ public final class ColorUtilsImpl implements ColorUtils {
     }
 
     @Override
-    public String toHexString(int intColor) {
+    public String toHexString(final int intColor) {
+        //TODO I think this doesn't keep original alpha.
         return String.format("#FF%06X", 0xFFFFFF & intColor);
     }
 
     @Override
-    public int addTransparencyToColor(int color, int alpha) {
+    public int addTransparencyToColor(final int color, final int alpha) {
+        if (alpha < 0 || alpha > MAX_CHANNEL_VALUE) {
+            throw new IllegalArgumentException("Alpha must be between 0 and 255.");
+        }
+
         return Color.argb(alpha, Color.red(color), Color.green(color), Color.blue(color));
     }
 
     @Override
-    public int addTransparencyToColor(int color, float alpha) {
-        final int int_alpha = (int)(MAX_CHANNEL_VALUE * alpha);
+    public int addTransparencyToColor(final int color, final float alpha) {
+        if (alpha < 0 || alpha > 1f) {
+            throw new IllegalArgumentException("Alpha must be between 0 and 1.");
+        }
+
+        final int int_alpha = (int) (MAX_CHANNEL_VALUE * alpha);
         return addTransparencyToColor(color, int_alpha);
     }
 
     @Override
-    public int calculateComplementaryColor(int color) {
+    public int calculateComplementaryColor(final int color) {
 
         // get existing colors
         int alpha = Color.alpha(color);
@@ -90,7 +103,7 @@ public final class ColorUtilsImpl implements ColorUtils {
     }
 
     @Override
-    public int calculateLighterColor(int color, int percentage) {
+    public int calculateLighterColor(final int color, final int percentage) {
 
         float perc = percentage / 100.0f + 1;
         // get existing colors
@@ -111,7 +124,7 @@ public final class ColorUtilsImpl implements ColorUtils {
     }
 
     @Override
-    public int calculateDarkerColor(int color, int percentage) {
+    public int calculateDarkerColor(final int color, final int percentage) {
 
         float perc = 1 - percentage / 100.0f;
         // get existing colors
