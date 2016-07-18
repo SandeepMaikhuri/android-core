@@ -28,4 +28,14 @@ public final class StringUtilsTest {
 
         Assert.assertEquals(result, stringUtils.arrayToCsvString(values));
     }
+
+    @Test
+    public void testStringConcatenationOfEmptyList() {
+        Assert.assertEquals("", stringUtils.arrayToCsvString(new String[]{}));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testStringConcatenationOfNull() {
+        stringUtils.arrayToCsvString(null);
+    }
 }
