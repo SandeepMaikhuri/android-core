@@ -2,4 +2,11 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Blur example -->
+    <dimen name="blur_example_image_width">200dp</dimen>
+    <dimen name="blur_example_image_height">@dimen/blur_example_image_width</dimen>
+
+    <dimen name="blur_example_button_margin_bottom">@dimen/activity_vertical_margin</dimen>
+
 </resources>
