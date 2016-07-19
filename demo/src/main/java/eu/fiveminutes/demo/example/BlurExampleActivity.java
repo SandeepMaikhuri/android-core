@@ -41,6 +41,7 @@ public final class BlurExampleActivity extends Activity {
 
     @OnClick(R.id.activity_blur_button)
     protected void onStartButtonClicked() {
+        //TODO Not so happy about this, but it does it's job.
         new BlurTask(blur, BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher), imageView).execute(BLUR_RADIUS);
     }
 
