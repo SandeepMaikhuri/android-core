@@ -7,8 +7,11 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses(
         {
                 CryptoUtilsTest.class,
+                CurrentTImeProviderTest.class,
+                GeoLocationUtilsTest.class,
                 ListUtilsTest.class,
                 MathUtilsTest.class,
+                StopWatchTest.class,
                 StringUtilsTest.class
         }
 )
