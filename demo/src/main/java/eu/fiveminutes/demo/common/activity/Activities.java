@@ -6,9 +6,9 @@ import eu.fiveminutes.demo.example.ExampleActivity;
 import eu.fiveminutes.demo.example.NetworkSurveillanceActivity;
 import eu.fiveminutes.demo.fonts.CustomFontActivity;
 
-public class Activities {
+public final class Activities {
 
-    static Class<?>[] CLASSES = {
+    public static final Class<?>[] CLASSES = {
             BlurExampleActivity.class,
             CustomFontActivity.class,
             DisplayUtilsExampleActivity.class,
