@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 public final class NetworkConnectionSurveillanceImpl implements NetworkConnectionSurveillance {
 
-    static final long DELAY_TIME_WITH_INTERNET = TimeUnit.MINUTES.toSeconds(1L);
+    static final long DELAY_TIME_HAS_INTERNET = TimeUnit.MINUTES.toSeconds(1L);
     static final long DELAY_TIME_NO_INTERNET = TimeUnit.SECONDS.toSeconds(2L);
     static final long NO_DELAY = 0L;
 
@@ -81,10 +81,10 @@ public final class NetworkConnectionSurveillanceImpl implements NetworkConnectio
     }
 
     private void enqueueDelayed() {
-        if (!hasInternetConnection()) {
-            scheduleCheck(DELAY_TIME_NO_INTERNET);
+        if (hasInternetConnection()) {
+            scheduleCheck(DELAY_TIME_HAS_INTERNET);
         } else {
-            scheduleCheck(DELAY_TIME_WITH_INTERNET);
+            scheduleCheck(DELAY_TIME_NO_INTERNET);
         }
     }
 
