@@ -11,6 +11,10 @@ public final class StringUtilsImpl implements StringUtils {
 
     @Override
     public String arrayToCsvString(final String[] values) {
+        if (values == null) {
+            throw new IllegalArgumentException("values == null");
+        }
+
         String csv = "";
         for (int i = 0; i < values.length; i++) {
             csv = csv.concat(values[i]);

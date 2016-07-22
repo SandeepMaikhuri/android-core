@@ -20,20 +20,18 @@ public class MainActivity extends ListActivity {
     }
 
     private ListAdapter buildListAdapter() {
-        List<String> items = new ArrayList<String>();
-        for (Class<?> demo : Activities.CLASSES) {
+        final List<String> items = new ArrayList<>(Activities.CLASSES.length);
+
+        for (final Class<?> demo : Activities.CLASSES) {
             items.add(demo.getSimpleName().replaceFirst("Activity", ""));
         }
-        return new ArrayAdapter<String>(
-                this,
-                android.R.layout.simple_list_item_1,
-                items);
+
+        return new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items);
     }
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        Intent intent = new Intent(this, Activities.CLASSES[position]);
-        startActivity(intent);
+        startActivity(new Intent(this, Activities.CLASSES[position]));
     }
 }

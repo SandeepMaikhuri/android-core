@@ -3,13 +3,12 @@ package eu.fiveminutes.util;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import javax.inject.Inject;
 
+@Deprecated
 public final class NetworkUtilsImpl implements NetworkUtils {
 
     private final ConnectivityManager connectivityManager;
 
-    @Inject
     public NetworkUtilsImpl(ConnectivityManager connectivityManager) {
         this.connectivityManager = connectivityManager;
     }

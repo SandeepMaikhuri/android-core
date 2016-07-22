@@ -157,7 +157,7 @@ public final class NetworkConnectionSurveillanceTest {
         stubScheduledExecutorService.executeNext();
 
         Mockito.verify(mockScheduledExecutorService, Mockito.times(1))
-               .schedule(Mockito.any(Runnable.class), Mockito.eq(NetworkConnectionSurveillanceImpl.DELAY_TIME_WITH_INTERNET), Mockito.eq(TimeUnit.SECONDS));
+               .schedule(Mockito.any(Runnable.class), Mockito.eq(NetworkConnectionSurveillanceImpl.DELAY_TIME_HAS_INTERNET), Mockito.eq(TimeUnit.SECONDS));
     }
 
     @Test
@@ -182,7 +182,7 @@ public final class NetworkConnectionSurveillanceTest {
         stubScheduledExecutorService.executeNext();
 
         Mockito.verify(mockScheduledExecutorService, Mockito.times(1))
-               .schedule(Mockito.any(Runnable.class), Mockito.eq(NetworkConnectionSurveillanceImpl.DELAY_TIME_WITH_INTERNET), Mockito.eq(TimeUnit.SECONDS));
+               .schedule(Mockito.any(Runnable.class), Mockito.eq(NetworkConnectionSurveillanceImpl.DELAY_TIME_HAS_INTERNET), Mockito.eq(TimeUnit.SECONDS));
     }
 
     @Test
@@ -196,6 +196,6 @@ public final class NetworkConnectionSurveillanceTest {
                .execute(Mockito.any(Runnable.class));
 
         Mockito.verify(mockScheduledExecutorService, Mockito.times(1))
-               .schedule(Mockito.any(Runnable.class), Mockito.eq(NetworkConnectionSurveillanceImpl.DELAY_TIME_WITH_INTERNET), Mockito.eq(TimeUnit.SECONDS));
+               .schedule(Mockito.any(Runnable.class), Mockito.eq(NetworkConnectionSurveillanceImpl.DELAY_TIME_HAS_INTERNET), Mockito.eq(TimeUnit.SECONDS));
     }
 }

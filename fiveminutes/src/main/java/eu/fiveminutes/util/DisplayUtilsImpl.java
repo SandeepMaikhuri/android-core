@@ -6,8 +6,6 @@ import android.util.TypedValue;
 import android.view.Display;
 import android.view.WindowManager;
 
-import javax.inject.Inject;
-
 public final class DisplayUtilsImpl implements DisplayUtils {
 
     private final Resources resources;
@@ -19,13 +17,12 @@ public final class DisplayUtilsImpl implements DisplayUtils {
     }
 
     @Override
-    public float getDpToPx(int dp) {
-
+    public float getDpToPx(final int dp) {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.getDisplayMetrics());
     }
 
     @Override
-    public float getPxToDp(int px) {
+    public float getPxToDp(final int px) {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, px, resources.getDisplayMetrics());
     }
 
@@ -36,32 +33,20 @@ public final class DisplayUtilsImpl implements DisplayUtils {
      */
     @Override
     public int getScreenHeight() {
-
-        int height;
-
-        Display display = windowManager.getDefaultDisplay();
-
-        Point size = new Point();
+        final Display display = windowManager.getDefaultDisplay();
+        final Point size = new Point();
         display.getSize(size);
 
-        height = size.y;
-
-        return height;
+        return size.y;
     }
 
     @Override
     public int getScreenWidth() {
-
-        int width;
-
-        Display display = windowManager.getDefaultDisplay();
-
-        Point size = new Point();
+        final Display display = windowManager.getDefaultDisplay();
+        final Point size = new Point();
         display.getSize(size);
 
-        width = size.x;
-
-        return width;
+        return size.x;
     }
 
     @Override
@@ -71,6 +56,7 @@ public final class DisplayUtilsImpl implements DisplayUtils {
         if (resourceId > 0) {
             result = resources.getDimensionPixelSize(resourceId);
         }
+
         return result;
     }
 

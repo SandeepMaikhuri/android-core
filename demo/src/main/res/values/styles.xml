@@ -5,4 +5,15 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <!-- Blur activity -->
+    <style name="BlurExampleImageViewStyle">
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="BlurExampleButtonStyle">
+        <item name="android:text">@string/activity_blur_button_text</item>
+        <item name="android:layout_gravity">bottom|center_horizontal</item>
+        <item name="android:layout_marginBottom">@dimen/blur_example_button_margin_bottom</item>
+    </style>
+
 </resources>

@@ -1,6 +1,6 @@
 package eu.fiveminutes.network;
 
-public final class StubMainThreadExecutor implements MainThreadExecutor {
+final class StubMainThreadExecutor implements MainThreadExecutor {
 
     @Override
     public void execute(final Runnable runnable) {
