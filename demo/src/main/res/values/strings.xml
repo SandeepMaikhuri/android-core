@@ -3,9 +3,21 @@
 
     <string name="app_name">Five Minutes Demo</string>
     <string name="title_activity_string_util">StringUtilActivity</string>
+    <string name="title_activity_display_util">DisplayUtilActivity</string>
     <string name="title_activity_custom_font">CustomFontActivity</string>
+    <string name="title_activity_blur_example">BlurExampleActivity</string>
     <string name="title_activity_threading_main">Threading examples</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <!-- Display utils example activity -->
+    <string name="activity_display_utils_100_dp_is_px">100 dp is:</string>
+    <string name="activity_display_utils_100_px_is_dp">100 px is:</string>
+    <string name="activity_display_utils_screen_height_is">Screen height is:</string>
+    <string name="activity_display_utils_screen_width_is">Screen width is:</string>
+    <string name="activity_display_utils_screen_status_bar_height_is">Screen status bar height is:</string>
+
+    <!-- Blur example activity -->
+    <string name="activity_blur_button_text">Start blur</string>
 
 </resources>

@@ -1,16 +1,9 @@
 package eu.fiveminutes.util;
 
-public class StringUtils {
+public interface StringUtils {
 
-    public static boolean isStringEmpty(String string) {
-        if (string == null) {
-            return true;
-        }
+    boolean isStringEmpty(String string);
 
-        if (string.equals("")) {
-            return true;
-        }
+    String arrayToCsvString(String[] values);
 
-        return false;
-    }
 }

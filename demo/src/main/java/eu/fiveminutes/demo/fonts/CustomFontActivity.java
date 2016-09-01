@@ -5,11 +5,11 @@ import android.os.Bundle;
 
 import eu.fiveminutes.demo.R;
 
-public class CustomFontActivity extends Activity {
+public final class CustomFontActivity extends Activity {
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_custom_font);
-  }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_custom_font);
+    }
 }

@@ -1,29 +1,34 @@
 package eu.fiveminutes;
 
 import android.os.Bundle;
+import android.support.test.runner.AndroidJUnit4;
 import android.support.v4.app.Fragment;
-import android.test.AndroidTestCase;
 
-import eu.fiveminutes.ui.utils.FragmentArguments;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-public class FragmentArgumentsTest extends AndroidTestCase {
+import eu.fiveminutes.util.FragmentArguments;
 
-  public void test(){
-    Fragment fragment = new DummyFragment();
-    FragmentArguments.putBoolean(fragment, "test", true);
-    FragmentArguments.putLong(fragment, "long", 235);
-    FragmentArguments.putInt(fragment, "int", 999);
-    FragmentArguments.putString(fragment, "string", "pero");
+@RunWith(AndroidJUnit4.class)
+public final class FragmentArgumentsTest {
 
-    Bundle arguments = fragment.getArguments();
-    assertEquals(arguments.getBoolean("test"), true);
-    assertEquals(arguments.getLong("long"), 235);
-    assertEquals(arguments.getInt("int"), 999);
-    assertEquals(arguments.getString("string"), "pero");
-  }
+    @Test
+    public void testAddingArgumentsToFragment() {
+        final Fragment fragment = new DummyFragment();
+        FragmentArguments.putBoolean(fragment, "test", true);
+        FragmentArguments.putLong(fragment, "long", 235);
+        FragmentArguments.putInt(fragment, "int", 999);
+        FragmentArguments.putString(fragment, "string", "pero");
 
+        final Bundle arguments = fragment.getArguments();
+        Assert.assertEquals(arguments.getBoolean("test"), true);
+        Assert.assertEquals(arguments.getLong("long"), 235);
+        Assert.assertEquals(arguments.getInt("int"), 999);
+        Assert.assertEquals(arguments.getString("string"), "pero");
+    }
 
-  public static class DummyFragment extends Fragment{
+    public static class DummyFragment extends Fragment {
 
-  }
+    }
 }

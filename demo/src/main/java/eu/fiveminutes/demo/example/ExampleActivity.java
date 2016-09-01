@@ -6,7 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import eu.fiveminutes.demo.R;
 
-public class ExampleActivity extends Activity {
+public final class ExampleActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
