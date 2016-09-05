@@ -1,4 +1,29 @@
 apply plugin: 'com.android.library'
+
+ext {
+    bintrayRepo = 'five-android'
+    bintrayName = 'eu.fiveminutes2'
+
+    publishedGroupId = 'eu.fiveminutes2'
+    libraryName = 'Five-android-lib'
+    artifact = 'five-android-lib'
+
+    libraryDescription = 'A wrapper for Facebook Native Like Button (LikeView) on Android'
+
+    siteUrl = 'https://github.com/nuuneoi/FBLikeAndroid'
+    gitUrl = 'https://github.com/nuuneoi/FBLikeAndroid.git'
+
+    libraryVersion = '0.0.1'
+
+    developerId = 'luka.babic@fiveminutes.eu'
+    developerName = 'Luka Babic'
+    developerEmail = 'luka.babic@fiveminutes.eu'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
 apply plugin: 'com.neenbedankt.android-apt'
 
 buildscript {
