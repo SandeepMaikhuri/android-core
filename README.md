@@ -48,6 +48,7 @@ Library contains number of utilities:
 ### Typefaced views
 
 There are four typefaced views available in this library:
+
 * **TypefacedButton**
 * **TypefacedEditText**
 * **TypefacedPagerTabStrip**
@@ -62,7 +63,7 @@ All of them can be included in layout.xml files.
  app:typeface="@string/typeface_name"/>
 ```
 
-Where **@string/typeface_name** is path for name of the typeface to be used (without /fonts prefix in its name).
+Where ```@string/typeface_name``` is path for name of the typeface to be used (without /fonts prefix in its name).
 
 
 ## Authors
