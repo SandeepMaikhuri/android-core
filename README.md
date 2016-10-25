@@ -10,7 +10,7 @@ This bundle contains utility classes we tend to re-use on many of our projects (
 
 * Android Studio 2.2
 
-## Using the library
+## Importing the library
 
 //TODO Add correct github link
 * In your app project add this as repository as a submodule:
@@ -27,8 +27,23 @@ OR
 compile ''
 ```
 
+## Usage
 
 
+
+## Authors
+
+* Tomislav Homan
+
+* Tomislav Novoselec
+
+* Luka Babić
+
+## Licence
+
+FiveUtils is available under the MIT license. See the [LICENSE](LICENSE) file for more info.
+
+//old.
 ## Advice
 
 * Do not push into master
