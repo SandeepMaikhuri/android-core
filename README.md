@@ -40,10 +40,30 @@ Library contains number of utilities:
 
 ### Network
 
-* ConnectivityInformation - utility class used to find out if device is connected to any network. **NOTE:** do not use this class to find out if device is connected to Internet.
-* InternetAddressResolver - utility class used to check if web URL can be resolved.
-* NetworkInformation - utility class used to find out if device is connected to Internet. It relies heavily on NetworkConnectionSurveillance. This has improved way of tracking whether device is connected on Internet and does not rely ony on Android's NetworkInfo.
-* NetworkConnectionSurveillance - class used to monitor internet connection. It should be singleton inside the application. It will perform regular check to see whether device is connected to the Internet. When connectivity status changes, it will notify it's observers.
+* **ConnectivityInformation** - utility class used to find out if device is connected to any network. **NOTE:** do not use this class to find out if device is connected to Internet.
+* **InternetAddressResolver** - utility class used to check if web URL can be resolved.
+* **NetworkInformation** - utility class used to find out if device is connected to Internet. It relies heavily on NetworkConnectionSurveillance. This has improved way of tracking whether device is connected on Internet and does not rely ony on Android's NetworkInfo.
+* **NetworkConnectionSurveillance** - class used to monitor internet connection. It should be singleton inside the application. It will perform regular check to see whether device is connected to the Internet. When connectivity status changes, it will notify it's observers.
+
+### Typefaced views
+
+There are four typefaced views available in this library:
+* **TypefacedButton**
+* **TypefacedEditText**
+* **TypefacedPagerTabStrip**
+* **TypefacedTextView**
+
+All of them can be included in layout.xml files.
+
+* In order to apply typeface to a view, first typeface resource file (.ttf) must be included inside ```/assert/fonts``` folder and then apply this inside layout.xml:
+```
+<eu.fiveminutes.TypefacedTextView
+ ...
+ app:typeface="@string/typeface_name"/>
+```
+
+Where **@string/typeface_name** is path for name of the typeface to be used (without /fonts prefix in its name).
+
 
 ## Authors
 
