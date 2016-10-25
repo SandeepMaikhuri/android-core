@@ -40,7 +40,7 @@ Library contains number of utilities:
 
 ### Network
 
-* ConnectivityInformation - utility class used to find out if device is connected to any network. **NOTE**: do not use this class to find out if device is connected to Internet.
+* ConnectivityInformation - utility class used to find out if device is connected to any network. **NOTE:** do not use this class to find out if device is connected to Internet.
 * InternetAddressResolver - utility class used to check if web URL can be resolved.
 * NetworkInformation - utility class used to find out if device is connected to Internet. It relies heavily on NetworkConnectionSurveillance. This has improved way of tracking whether device is connected on Internet and does not rely ony on Android's NetworkInfo.
 * NetworkConnectionSurveillance - class used to monitor internet connection. It should be singleton inside the application. It will perform regular check to see whether device is connected to the Internet. When connectivity status changes, it will notify it's observers.
