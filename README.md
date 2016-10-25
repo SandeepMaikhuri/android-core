@@ -63,6 +63,24 @@ All of them can be included in layout.xml files.
 
 Where **typeface_name** is string resource with path for name of the typeface to be used (without /fonts prefix in its name).
 
+### Utils
+
+* **BluUtils** - Used to apply blur effect for bitmaps.
+* **ColorUtils** - Used to make transformations on integer color values.
+* **CryptoUtils** - //TODO
+* **CurrentTimeProvider** - Used to get current UNIX time (both second and milliseconds).
+* **DisplayUtils** - Used to find out information about device screen.
+* **Foreground** - Used to track whether app is in foreground or background.
+* **FragmentArguments** - //TODO
+* **GeolocationUtils** - //TODO
+* **ImageUtils** - Util for bitmap manipulation and loading images.
+* **IntentUtils** - Util for creating common intents in Android.
+* **ListUtils** - List utility used for evaluating various stuff on lists.
+* **MathUtils** - Util for calculating transformed values
+* **PicassoWrapper** - //TODO
+* **ResourceUtils** - Util for getting resources from Android.
+* **StopWatch** - //TODO
+* **StringUtils** - Util for evaluating various operations on string value.
 
 ## Authors
 
