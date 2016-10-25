@@ -1,0 +1,21 @@
+language: android
+android:
+  components:
+  - tools
+  - platform-tools
+  - build-tools-23.0.3
+  - android-23
+  - extra-android-m2repository
+  - extra-android-support
+
+jdk:
+  - oraclejdk8
+
+sudo: false
+
+script: 'travis_retry ./gradlew build'
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
