@@ -1,13 +1,33 @@
-# Five Minutes Library
+# FiveUtils
+
+## About
 
 These are common functionalities used by Five Minutes apps. See it in use by running **demo app**. Inspired by [this guy](http://www.matkostankovic.com/repository/images/_variations/3/3/3361562781e9d349d15df3cf4461229f_medium.jpg).
 
+This bundle contains utility classes we tend to re-use on many of our projects (us being [Five Agency's](http://five.agency) Android Team). We expect there'll be many more added, but in the mean time, you're free to use/re-use/upgrade all of the existing code here.
+
+## Requirements
+
+* Android Studio 2.2
+
 ## Using the library
 
-* In your app project add this as repository as a submodule: `git submodule add git@bitbucket.org:fiveminutes/fiveminutes-android.git`
+//TODO Add correct github link
+* In your app project add this as repository as a submodule:
+```
+git submodule add git@bitbucket.org:fiveminutes/fiveminutes-android.git
+```
 * Import **fiveminutes** as library project
-* Create branch: `cd fiveminutes-android && git checkout -b your-branch-name`
-* While developing, put anything that may be of use to other to library
+
+OR
+
+* Add this library as gradle dependency by adding this line inside your app's dependency block in build.gradle:
+```
+//TODO
+compile ''
+```
+
+
 
 ## Advice
 
