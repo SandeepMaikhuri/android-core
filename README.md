@@ -2,8 +2,6 @@
 
 ## About
 
-These are common functionalities used by Five Minutes apps. See it in use by running **demo app**. Inspired by [this guy](http://www.matkostankovic.com/repository/images/_variations/3/3/3361562781e9d349d15df3cf4461229f_medium.jpg).
-
 This bundle contains utility classes we tend to re-use on many of our projects (us being [Five Agency's](http://five.agency) Android Team). We expect there'll be many more added, but in the mean time, you're free to use/re-use/upgrade all of the existing code here.
 
 ## Requirements
@@ -49,10 +47,10 @@ Library contains number of utilities:
 
 There are four typefaced views available in this library:
 
-* **TypefacedButton**
-* **TypefacedEditText**
-* **TypefacedPagerTabStrip**
-* **TypefacedTextView**
+* TypefacedButton
+* TypefacedEditText
+* TypefacedPagerTabStrip
+* TypefacedTextView
 
 All of them can be included in layout.xml files.
 
@@ -63,7 +61,7 @@ All of them can be included in layout.xml files.
  app:typeface="@string/typeface_name"/>
 ```
 
-Where ```@string/typeface_name``` is path for name of the typeface to be used (without /fonts prefix in its name).
+Where **typeface_name** is string resource with path for name of the typeface to be used (without /fonts prefix in its name).
 
 
 ## Authors
