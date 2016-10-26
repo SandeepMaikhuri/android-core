@@ -1,21 +1,31 @@
 language: android
 android:
   components:
-  - tools
-  - platform-tools
-  - build-tools-23.0.3
-  - android-23
-  - extra-android-m2repository
-  - extra-android-support
+     - platform-tools
+     - tools
+     - build-tools-24.0.3
+     - android-24
+
+  licenses:
+    - 'android-sdk-license.*'
+    - 'android-sdk-preview-license-.+'
+    - 'google-gdk-license-.+'
+    - 'extra-google-google_play_services'
+    - 'extra-google-m2repository'
+    - 'extra-android-m2repository'
 
 jdk:
   - oraclejdk8
 
 sudo: false
 
-script: 'travis_retry ./gradlew build'
+before_install:
+ - chmod +x gradlew
+ - echo yes | android update sdk --filter extra-android-support --no-ui --force > /dev/null
+ - echo yes | android update sdk --filter extra-android-m2repository --no-ui --force > /dev/null
+
+script: './gradlew clean check'
 
 cache:
   directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+    - $HOME/.gradle
