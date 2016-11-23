@@ -54,11 +54,11 @@ bintray {
 
     configurations = ['archives']
     pkg {
-        repo = 'android'
-        name = 'android-five-utils'
+        repo = 'maven'
+        name = 'android-core'
         websiteUrl = siteUrl
         vcsUrl = gitUrl
-        userOrg = 'fiveagency'
+        userOrg = 'fiveandroid'
         licenses = ["MIT"]
         publish = true
     }
@@ -69,8 +69,7 @@ install {
         pom {
             project {
                 packaging 'aar'
-                name ' A collection of various math extensions, random generators and other utility modules we tend to re-use on\n' +
-                    '    our projects at Five (http://five.agency).'
+                name 'A collection of various utility modules we tend to re-use on our projects at Five (http://five.agency).'
                 url siteUrl
                 licenses {
                     license {
