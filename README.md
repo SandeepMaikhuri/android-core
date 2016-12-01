@@ -10,24 +10,9 @@ This bundle contains utility classes we tend to re-use on many of our projects (
 
 ## Importing the library
 
-* In your app project add this as repository as a submodule:
-```
-git submodule add https://github.com/fiveagency/android-core.git
-```
-* Import **fiveminutes** as library project
-
-OR
-
 * Add this library as gradle dependency by adding this line inside your app's dependency block in build.gradle:
 ```
 compile 'agency.five:android-core:1.0.0'
-```
-
-## Examples
-
-In order to run examples run the 'demo' module inside project you clone from:
-```
-git submodule add https://github.com/fiveagency/android-core.git
 ```
 
 ## Usage
