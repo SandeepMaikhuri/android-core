@@ -1,1 +1,1 @@
-include ':demo', ':fiveminutes'
+include ':demo', ':android-core'
