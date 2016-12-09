@@ -20,5 +20,6 @@ public final class DemoApplication extends Application {
         foreground = new ForegroundImpl(this, new Handler(Looper.getMainLooper()));
         listener = new ForegroundListenerImpl();
         foreground.addListener(listener);
+
     }
 }
