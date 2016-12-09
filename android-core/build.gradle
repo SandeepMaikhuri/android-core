@@ -50,7 +50,11 @@ android {
 }
 
 Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+def local_properties_file = project.rootProject.file('local.properties')
+if (local_properties_file.exists()) {
+    properties.load(local_properties_file.newDataInputStream())
+}
 
 bintray {
     user = properties.getProperty("bintray.user")
